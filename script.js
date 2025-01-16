@@ -1,5 +1,5 @@
 document.getElementById('ee-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
   
     const formData = {
       purpose: document.getElementById('purpose').value,
@@ -8,7 +8,7 @@ document.getElementById('ee-form').addEventListener('submit', function (e) {
       date: document.getElementById('date').value,
     };
   
-    fetch('https://script.google.com/macros/library/d/1Eh2arpDLGNKPWRJVWWFEt_wET4EwDrquVkWJz512jCuaYZ5LUe5eGfum/4', {
+    fetch('https://script.google.com/macros/s/AKfycbyUtDjf3VOiOpzsvDQbG1ERcYxMjJrIHsJl6Z2Tgpm23aFaAl_aedkM7DP4E4IkvrSc/exec', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
