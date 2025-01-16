@@ -1,37 +1,34 @@
 document.getElementById('ee-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault(); // Prevent default form submission
   
-    // Collect form data
     const formData = {
-      purpose: document.getElementById('purpose').value,
-      procedure: document.getElementById('procedure').value,
-      reason: document.getElementById('reason').value,
-      date: document.getElementById('date').value,
+        purpose: document.getElementById('purpose').value,
+        procedure: document.getElementById('procedure').value,
+        reason: document.getElementById('reason').value,
+        date: document.getElementById('date').value,
     };
   
-    // Send data to the Google Apps Script Web App
-    fetch('https://script.google.com/macros/s/AKfycbw3IatJrEWPWrELomTZk-fvqw58_mqnjwfVSYbTiFiKHVv82-oQpiLKrfeKeA7HGkn3/exec', {
-      method: 'POST', // HTTP POST request
-      body: JSON.stringify(formData), // Send the form data as JSON
-      headers: { 'Content-Type': 'application/json' }, // Specify JSON content type
+    fetch('https://script.google.com/macros/s/AKfycbyUtDjf3VOiOpzsvDQbG1ERcYxMjJrIHsJl6Z2Tgpm23aFaAl_aedkM7DP4E4IkvrSc/exec', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json(); // Parse the response as JSON
-      })
-      .then((data) => {
-        if (data.result === 'success') {
-          alert('Form submitted successfully!');
-          document.getElementById('ee-form').reset(); // Reset the form
-        } else {
-          alert(`Error: ${data.message}`);
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error); // Log any errors
-        alert('Error submitting the form! Check the console for more details.');
-      });
-  });
-  
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.result === 'success') {
+                alert('Form submitted successfully!');
+                document.getElementById('ee-form').reset();
+            } else {
+                alert(`Error: ${data.message}`);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error submitting the form! Check the console for more details.');
+        });
+});
