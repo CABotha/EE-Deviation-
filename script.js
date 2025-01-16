@@ -8,7 +8,7 @@ document.getElementById('ee-form').addEventListener('submit', function (e) {
       date: document.getElementById('date').value,
     };
   
-    fetch('https://script.google.com/macros/s/AKfycbxD2nHdIY3N8H4QnyWvIEzZyJX5lgSu_rEPGDEqLJ4ZwwM0fqbOFtXiYAai_TC19tkL/exec', {
+    fetch(AKfycbxD2nHdIY3N8H4QnyWvIEzZyJX5lgSu_rEPGDEqLJ4ZwwM0fqbOFtXiYAai_TC19tkL, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' },
