@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EE Deviation Record</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Employment Equity Deviation Record</h1>
+  <form id="ee-form">
+    <label for="purpose">Purpose of Deviation:</label>
+    <textarea id="purpose" name="purpose" required></textarea>
+
+    <label for="procedure">Procedure Followed:</label>
+    <select id="procedure" name="procedure" required>
+      <option value="Internal Posting">Internal Posting</option>
+      <option value="External Posting">External Posting</option>
+      <option value="EE Committee Consultation">EE Committee Consultation</option>
+    </select>
+
+    <label for="reason">Reason for Deviation:</label>
+    <select id="reason" name="reason" required>
+      <option value="No Qualified Candidates">No Qualified Candidates</option>
+      <option value="Urgent Operational Need">Urgent Operational Need</option>
+    </select>
+
+    <label for="date">Approval Date:</label>
+    <input type="date" id="date" name="date" required>
+
+    <button type="submit">Submit</button>
+  </form>
+  <script src="script.js"></script>
+</body>
+</html>
