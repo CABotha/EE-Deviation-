@@ -1,6 +1,7 @@
 document.getElementById('ee-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
   
+    // Collect form data
     const formData = {
       purpose: document.getElementById('purpose').value,
       procedure: document.getElementById('procedure').value,
@@ -8,18 +9,29 @@ document.getElementById('ee-form').addEventListener('submit', function (e) {
       date: document.getElementById('date').value,
     };
   
-    fetch(AKfycbxD2nHdIY3N8H4QnyWvIEzZyJX5lgSu_rEPGDEqLJ4ZwwM0fqbOFtXiYAai_TC19tkL, {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: { 'Content-Type': 'application/json' },
+    // Send data to the Google Apps Script Web App
+    fetch('https://script.google.com/macros/s/AKfycbw3IatJrEWPWrELomTZk-fvqw58_mqnjwfVSYbTiFiKHVv82-oQpiLKrfeKeA7HGkn3/exec', {
+      method: 'POST', // HTTP POST request
+      body: JSON.stringify(formData), // Send the form data as JSON
+      headers: { 'Content-Type': 'application/json' }, // Specify JSON content type
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json(); // Parse the response as JSON
+      })
       .then((data) => {
-        alert('Form submitted successfully!');
-        document.getElementById('ee-form').reset();
+        if (data.result === 'success') {
+          alert('Form submitted successfully!');
+          document.getElementById('ee-form').reset(); // Reset the form
+        } else {
+          alert(`Error: ${data.message}`);
+        }
       })
       .catch((error) => {
-        console.error('Error:', error);
-        alert('Error submitting the form!');
+        console.error('Error:', error); // Log any errors
+        alert('Error submitting the form! Check the console for more details.');
       });
   });
+  
