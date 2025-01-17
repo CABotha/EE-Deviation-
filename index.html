@@ -13,21 +13,25 @@
     </header>
 
     <form id="ee-form">
+        <!-- Purpose Section -->
         <div class="form-section">
             <h3>Purpose:</h3>
             <p>The purpose of this tool is to document all relevant information and evidence in the situation where an appointment is made that is not in alignment with the EE Plan and Targets.</p>
         </div>
 
+        <!-- Procedure Section -->
         <div class="form-section">
             <h3>Procedure:</h3>
             <p>Prior to making an offer for employment and/or promotion where the selected candidate is not the number 1 preferred candidate based on the EE analysis and Ministerial Targets, complete the questions below and add in relevant supporting information.</p>
         </div>
 
+        <!-- Reason Section -->
         <div class="form-section">
             <h3>Reason:</h3>
             <p>In the event of a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the seven justifiable reasons for not meeting specific targets.</p>
         </div>
 
+        <!-- Questions Section -->
         <div class="form-section">
             <label for="date-completion">Date of Completion:</label>
             <input type="date" id="date-completion" required>
@@ -57,13 +61,95 @@
                 <option value="Replacement">Replacement</option>
             </select>
 
-            <label for="reason-not-selected">Reasons for Not Selecting the Highest Priority Candidate:</label>
-            <select id="reason-not-selected" required>
+            <label for="priority-highest">Targeted Sub-Race and Gender Groups (Highest Priority):</label>
+            <select id="priority-highest" required>
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
+
+            <label for="priority-next-highest">Targeted Sub-Race and Gender Groups (Next Highest):</label>
+            <select id="priority-next-highest">
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
+
+            <label for="priority-third-highest">Targeted Sub-Race and Gender Groups (Third Highest):</label>
+            <select id="priority-third-highest">
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
+
+            <label for="preferred-alignment">Preferred Candidate Aligned to Highest Priority:</label>
+            <select id="preferred-alignment" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+        <!-- Assessment Section -->
+        <div class="form-section">
+            <h4>Assessment of Candidate:</h4>
+            <label for="qualifications">Qualifications:</label>
+            <textarea id="qualifications"></textarea>
+
+            <label for="prior-learning">Prior Learning:</label>
+            <textarea id="prior-learning"></textarea>
+
+            <label for="experience">Relevant Experience:</label>
+            <textarea id="experience"></textarea>
+
+            <label for="competencies">Acquirable Competencies:</label>
+            <select id="competencies" required>
+                <option value="1 Month">1 Month</option>
+                <option value="2 Months">2 Months</option>
+                <option value="3 Months">3 Months</option>
+                <option value="4 Months">4 Months</option>
+                <option value="5 Months">5 Months</option>
+                <option value="6 Months">6 Months</option>
+                <option value="7+ Months">7+ Months</option>
+                <option value="More than 12 Months">More than 12 Months</option>
+                <option value="Not within a reasonable time">Not within a reasonable time</option>
+            </select>
+        </div>
+
+        <!-- Evidence Section -->
+        <div class="form-section">
+            <h4>Evidence:</h4>
+            <label for="job-profile">Job Profile:</label>
+            <textarea id="job-profile"></textarea>
+
+            <label for="advertising-channels">Advertising Channels:</label>
+            <textarea id="advertising-channels"></textarea>
+
+            <label for="response-numbers">Response Numbers:</label>
+            <textarea id="response-numbers"></textarea>
+
+            <label for="shortlist-demographics">Shortlist Demographics:</label>
+            <textarea id="shortlist-demographics"></textarea>
+
+            <label for="reasons-not-selected">Reasons for Not Selecting Highest Priority:</label>
+            <select id="reasons-not-selected" required>
                 <option value="Insufficient recruitment opportunities">Insufficient recruitment opportunities</option>
                 <option value="Insufficient promotion opportunities">Insufficient promotion opportunities</option>
-                <option value="Insufficient target individuals from the designated groups with the relevant qualification, skills and experience">
-                    Insufficient target individuals from the designated groups with the relevant qualification, skills and experience
-                </option>
+                <option value="Insufficient target individuals from the designated groups">Insufficient target individuals from the designated groups</option>
                 <option value="CCMA awards/Court Order">CCMA awards/Court Order</option>
                 <option value="Transfer of business">Transfer of business</option>
                 <option value="Mergers/Acquisitions">Mergers/Acquisitions</option>
@@ -71,15 +157,17 @@
             </select>
         </div>
 
+        <!-- Sign-Off Section -->
         <div class="form-section">
+            <h4>Sign-Off:</h4>
             <label for="recruiting-manager">Recruiting Line Manager:</label>
-            <input type="text" id="recruiting-manager" required>
+            <input type="text" id="recruiting-manager">
 
             <label for="senior-manager">Senior Manager Responsible for EE:</label>
-            <input type="text" id="senior-manager" required>
+            <input type="text" id="senior-manager">
 
             <label for="ceo">CEO or Designated Appointee:</label>
-            <input type="text" id="ceo" required>
+            <input type="text" id="ceo">
         </div>
 
         <button type="submit">Submit</button>
@@ -88,7 +176,5 @@
     <footer>
         <p>© 2025 Your Company Name. All rights reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
