@@ -1,4 +1,3 @@
-// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('ee-form');
   
@@ -19,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
               "7.4.2 Next Highest Priority": document.getElementById('priority-next').value,
               "7.4.3 Third Highest Priority": document.getElementById('priority-third').value,
               "8. Aligned to Highest Priority": document.getElementById('aligned-highest').value,
+              "8.3 Preferred Candidate Group": document.getElementById('preferred-candidate-group').value,
               "9.1 Qualifications": document.getElementById('qualifications').value,
               "9.2 Prior Learning": document.getElementById('prior-learning').value,
               "9.3 Relevant Experience": document.getElementById('relevant-experience').value,
