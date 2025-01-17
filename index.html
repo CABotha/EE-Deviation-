@@ -41,7 +41,7 @@
             <label for="department">2. Department or division in which the position will work:</label>
             <input type="text" id="department" required>
 
-            <label for="job-title">3. Job title of the position and the job profile:</label>
+            <label for="job-title">3. Job title of the position:</label>
             <input type="text" id="job-title" required>
 
             <label for="occupational-level">4. Occupational level of the said position:</label>
@@ -121,12 +121,24 @@
 
             <div class="conditional-note">8.1 If "no", then continue with this document</div>
             <div class="conditional-note">8.2 If "yes" then there is no evident need to continue</div>
+
+            <label for="preferred-candidate-group">8.3 What is the sub-race and gender group of the preferred candidate:</label>
+            <select id="preferred-candidate-group" required>
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
         </div>
 
         <!-- Candidate Assessment -->
         <div class="form-section">
-            <h3>Candidate Assessment</h3>
-            <p>Assessment of whether the highest targeted race and gender sub-group candidate was a "suitably qualified person":</p>
+            <h3>Justification and assessment of the Highest Ranking Candidate from the targeted sub-race and gender group</h3>
+            <p>You will need to substantiate why this individual was not suitable for the job.</p>
 
             <label for="qualifications">9.1 Qualifications:</label>
             <textarea id="qualifications"></textarea>
