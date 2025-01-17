@@ -28,22 +28,23 @@
         <!-- Reason Section -->
         <div class="form-section">
             <h3>Reason:</h3>
-            <p>In the event of a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the seven justifiable reasons for not meeting specific targets.</p>
+            <p>In the event that there is a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the 7 justifiable reasons for not meeting specific targets.</p>
         </div>
 
-        <!-- Questions Section -->
-        <h4>Refer to the employment equity plan and specifically the targets and answer these questions:</h4>
+        <!-- Audit and Record Questions -->
         <div class="form-section">
-            <label for="date-completion">1. Date of Completion:</label>
+            <h3>Audit and Record Questions</h3>
+            
+            <label for="date-completion">1. Date of completion of this document:</label>
             <input type="date" id="date-completion" required>
 
-            <label for="department">2. Department or Division:</label>
+            <label for="department">2. Department or division in which the position will work:</label>
             <input type="text" id="department" required>
 
-            <label for="job-title">3. Job Title and Job Profile:</label>
+            <label for="job-title">3. Job title of the position and the job profile:</label>
             <input type="text" id="job-title" required>
 
-            <label for="occupational-level">4. Occupational Level:</label>
+            <label for="occupational-level">4. Occupational level of the said position:</label>
             <select id="occupational-level" required>
                 <option value="Top Management">Top Management</option>
                 <option value="Senior Management">Senior Management</option>
@@ -53,26 +54,30 @@
                 <option value="Unskilled">Unskilled</option>
             </select>
 
-            <label for="urgency-level">5. Urgency Level:</label>
-            <input type="text" id="urgency-level" required>
+            <label for="urgency-level">5. Urgency level for new appointment - date and reasons as well as absolute last date that vacancy can be filled:</label>
+            <textarea id="urgency-level" required></textarea>
 
-            <label for="position-type">6. New Position or Replacement Position:</label>
+            <label for="position-type">6. New position or replacement position:</label>
             <select id="position-type" required>
                 <option value="New">New</option>
                 <option value="Replacement">Replacement</option>
             </select>
+        </div>
 
-            <label for="targeted-position">7. Is the position being considered one that requires a specific designated person to achieve the targets?</label>
-            <select id="targeted-position" required>
+        <!-- EE Plan Questions -->
+        <div class="form-section">
+            <h3>Employment Equity Plan Questions</h3>
+
+            <label for="requires-designated">7.1 Is the position being considered one that requires a specific designated person to make progress toward and/or achieve the targets?</label>
+            <select id="requires-designated" required>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
-        </div>
 
-        <!-- Target Groups and Alignment -->
-        <h4>Target Groups and Alignment</h4>
-        <div class="form-section">
-            <label for="priority-highest">8. Targeted Sub-Race and Gender Groups (Highest Priority):</label>
+            <div class="conditional-note">7.2 If "no", then there is no evident need to continue with this document</div>
+            <div class="conditional-note">7.3 If "yes" then answer the following questions</div>
+
+            <label for="priority-highest">7.4.1 Highest Priority Target Group:</label>
             <select id="priority-highest" required>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
@@ -84,8 +89,8 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="priority-next-highest">9. Targeted Sub-Race and Gender Groups (Next Highest):</label>
-            <select id="priority-next-highest">
+            <label for="priority-next">7.4.2 Next Highest Priority Target Group:</label>
+            <select id="priority-next">
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -96,8 +101,8 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="priority-third-highest">10. Targeted Sub-Race and Gender Groups (Third Highest):</label>
-            <select id="priority-third-highest">
+            <label for="priority-third">7.4.3 Third Highest Priority Target Group:</label>
+            <select id="priority-third">
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -108,61 +113,92 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="preferred-alignment">11. Is the Preferred Candidate Aligned to the Highest Priority?</label>
-            <select id="preferred-alignment" required>
+            <label for="aligned-highest">8. Is the preferred candidate for the position aligned to the "highest" priority sub-race and gender group?</label>
+            <select id="aligned-highest" required>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
+
+            <div class="conditional-note">8.1 If "no", then continue with this document</div>
+            <div class="conditional-note">8.2 If "yes" then there is no evident need to continue</div>
         </div>
 
-        <!-- Justifiable Reasons Section -->
-        <h4>Justifiable Reasons for Not Selecting the Highest Priority Candidate</h4>
+        <!-- Candidate Assessment -->
         <div class="form-section">
-            <label for="justifiable-reasons">12. Select the Justifiable Reason:</label>
-            <select id="justifiable-reasons" required>
-                <option value="Insufficient recruitment opportunities">Insufficient recruitment opportunities</option>
-                <option value="Insufficient promotion opportunities">Insufficient promotion opportunities</option>
-                <option value="Insufficient target individuals from the designated groups">Insufficient target individuals from the designated groups</option>
-                <option value="CCMA awards/Court Order">CCMA awards/Court Order</option>
-                <option value="Transfer of business">Transfer of business</option>
-                <option value="Mergers/Acquisitions">Mergers/Acquisitions</option>
-                <option value="Impact on business economic circumstances">Impact on business economic circumstances</option>
+            <h3>Candidate Assessment</h3>
+            <p>Assessment of whether the highest targeted race and gender sub-group candidate was a "suitably qualified person":</p>
+
+            <label for="qualifications">9.1 Qualifications:</label>
+            <textarea id="qualifications"></textarea>
+
+            <label for="prior-learning">9.2 Prior learning:</label>
+            <textarea id="prior-learning"></textarea>
+
+            <label for="relevant-experience">9.3 Relevant experience:</label>
+            <textarea id="relevant-experience"></textarea>
+
+            <label for="competency-time">9.4 How long would it take for the candidate to acquire the competencies?</label>
+            <select id="competency-time" required>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+                <option value="7">7 Months</option>
+                <option value="8">8 Months</option>
+                <option value="9">9 Months</option>
+                <option value="10">10 Months</option>
+                <option value="11">11 Months</option>
+                <option value="12">12 Months</option>
+                <option value="more">More than 12 Months</option>
+                <option value="not-reasonable">Not within a reasonable time period</option>
             </select>
         </div>
 
         <!-- Evidence Section -->
         <div class="form-section">
-            <h4>Evidence:</h4>
-            <label for="job-profile">13. Job Profile:</label>
+            <h3>Evidence Record</h3>
+
+            <label for="job-profile">10.1 The job profile:</label>
             <textarea id="job-profile"></textarea>
 
-            <label for="advertising-channels">14. Advertising Channels:</label>
+            <label for="advertising-channels">10.2 The channels in which it was advertised:</label>
             <textarea id="advertising-channels"></textarea>
 
-            <label for="response-numbers">15. Response Numbers:</label>
+            <label for="response-numbers">10.3 The core response numbers:</label>
             <textarea id="response-numbers"></textarea>
+
+            <label for="shortlist-demographics">10.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
+            <textarea id="shortlist-demographics"></textarea>
+
+            <label for="non-selection-reason">10.4.2 The primary reason(s) why the highest priority candidate was not selected:</label>
+            <textarea id="non-selection-reason"></textarea>
         </div>
 
         <!-- Sign-Off Section -->
         <div class="form-section">
-            <h4>Sign-Off:</h4>
-            <label for="recruiting-manager">16. Recruiting Line Manager:</label>
-            <input type="text" id="recruiting-manager">
+            <h3>Sign-off</h3>
 
-            <label for="senior-manager">17. Senior Manager Responsible for EE:</label>
-            <input type="text" id="senior-manager">
+            <label for="recruiting-manager">11.1 Recruiting line manager:</label>
+            <input type="text" id="recruiting-manager" required>
 
-            <label for="ceo">18. CEO or Designated Appointee:</label>
-            <input type="text" id="ceo">
+            <label for="senior-manager">11.2 Senior manager responsible for EE:</label>
+            <input type="text" id="senior-manager" required>
+
+            <label for="ceo">11.3 CEO or their designated appointee:</label>
+            <input type="text" id="ceo" required>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Submit and Export to Excel</button>
     </form>
 
     <footer>
         <p>© 2025 Your Company Name. All rights reserved.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="script.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
