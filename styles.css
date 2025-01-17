@@ -5,87 +5,195 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  line-height: 1.6;
 }
 
+/* Header Styles */
 header {
   background-color: #2e5aab;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 header img {
-  height: 50px;
-  margin-right: 10px;
+  height: 80px;
+  width: auto;
+  margin-right: 20px;
 }
 
 header h1 {
   margin: 0;
+  font-size: 2.2em;
+  font-weight: 600;
 }
 
+/* Form Container */
 form {
   max-width: 900px;
   margin: 20px auto;
   background: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Section Styles */
+.form-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Heading Styles */
+h3 {
+  color: #2e5aab;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  border-bottom: 2px solid #d1e0f0;
+  padding-bottom: 10px;
+}
+
+h4 {
+  color: #2e5aab;
+  margin: 20px 0 10px;
+  font-size: 1.2em;
+}
+
+/* Label Styles */
 label {
   display: block;
   font-weight: bold;
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #444;
 }
 
-textarea,
-input,
+/* Input Styles */
+input[type="text"],
+input[type="date"],
 select,
-button {
+textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 12px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 textarea {
   resize: vertical;
+  min-height: 100px;
 }
 
+/* Select Dropdown Styles */
+select {
+  background-color: white;
+  cursor: pointer;
+}
+
+select:hover {
+  border-color: #2e5aab;
+}
+
+/* Conditional Notes */
+.conditional-note {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #2e5aab;
+  font-style: italic;
+  color: #666;
+}
+
+/* Button Styles */
 button {
   background-color: #2e5aab;
   color: white;
   border: none;
-  cursor: pointer;
+  padding: 15px 30px;
   font-size: 16px;
-  padding: 10px 15px;
-  text-transform: uppercase;
   font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #224a8a;
 }
 
+button:active {
+  transform: translateY(1px);
+}
+
+/* Footer Styles */
 footer {
   text-align: center;
   background-color: #2e5aab;
   color: white;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 0.9em;
 }
 
-h3, h4 {
-  color: #2e5aab;
-  margin-bottom: 10px;
-  font-size: 18px;
-  border-bottom: 2px solid #d1e0f0;
-  padding-bottom: 5px;
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  form {
+      margin: 10px;
+      padding: 15px;
+  }
+
+  header {
+      flex-direction: column;
+      padding: 15px;
+  }
+
+  header img {
+      margin-right: 0;
+      margin-bottom: 10px;
+  }
+
+  header h1 {
+      font-size: 1.8em;
+  }
+
+  .form-section {
+      padding: 15px;
+  }
+}
+
+/* Focus States */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2e5aab;
+  box-shadow: 0 0 5px rgba(46, 90, 171, 0.2);
+}
+
+/* Required Field Indicator */
+input:required,
+select:required,
+textarea:required {
+  border-left: 3px solid #2e5aab;
+}
+
+/* Error State */
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: #ff4444;
 }
