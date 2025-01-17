@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="header-white">
         <img src="logo.png" alt="Company Logo" class="logo">
-        <h1>Employment Equity Deviation Record</h1>
+        <h1 class="title-blue">Employment Equity Deviation Record</h1>
     </header>
 
     <form id="ee-form">
@@ -31,18 +31,20 @@
             <p>In the event of a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the seven justifiable reasons for not meeting specific targets.</p>
         </div>
 
-        <!-- Questions Section -->
+        <!-- Audit and Record Questions -->
         <div class="form-section">
-            <label for="date-completion">Date of Completion:</label>
+            <h3>Audit and Record Questions:</h3>
+
+            <label for="date-completion">1. Date of Completion of this Document:</label>
             <input type="date" id="date-completion" required>
 
-            <label for="department">Department or Division:</label>
+            <label for="department">2. Department or Division:</label>
             <input type="text" id="department" required>
 
-            <label for="job-title">Job Title and Job Profile:</label>
+            <label for="job-title">3. Job Title and Job Profile:</label>
             <input type="text" id="job-title" required>
 
-            <label for="occupational-level">Occupational Level:</label>
+            <label for="occupational-level">4. Occupational Level:</label>
             <select id="occupational-level" required>
                 <option value="Top Management">Top Management</option>
                 <option value="Senior Management">Senior Management</option>
@@ -52,77 +54,121 @@
                 <option value="Unskilled">Unskilled</option>
             </select>
 
-            <label for="urgency-level">Urgency Level:</label>
+            <label for="urgency-level">5. Urgency Level (Date & Reasons):</label>
             <input type="text" id="urgency-level" required>
 
-            <label for="position-type">New Position or Replacement Position:</label>
+            <label for="position-type">6. New Position or Replacement Position:</label>
             <input type="text" id="position-type" required>
 
-            <label for="priority-highest">Targeted Sub-Race and Gender Groups (Highest Priority):</label>
-            <input type="text" id="priority-highest" required>
+            <h4>Refer to the employment equity plan and specifically the targets and answer these questions:</h4>
+            <label for="designated-progress">7.1. Is the position being considered one that requires a specific designated person to make progress toward targets?</label>
+            <select id="designated-progress" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-            <label for="priority-next-highest">Targeted Sub-Race and Gender Groups (Next Highest):</label>
-            <input type="text" id="priority-next-highest">
+            <h4>7.3. If "yes," answer the following:</h4>
+            <label for="priority-highest">7.4.1. Targeted Sub-Race and Gender Groups (Highest Priority):</label>
+            <select id="priority-highest" required>
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
 
-            <label for="priority-third-highest">Targeted Sub-Race and Gender Groups (Third Highest):</label>
-            <input type="text" id="priority-third-highest">
+            <label for="priority-next-highest">7.4.2. Next Highest Priority:</label>
+            <select id="priority-next-highest">
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
 
-            <label for="preferred-alignment">Preferred Candidate Aligned to Highest Priority:</label>
-            <input type="text" id="preferred-alignment" required>
-        </div>
+            <label for="priority-third-highest">7.4.3. Third Highest Priority:</label>
+            <select id="priority-third-highest">
+                <option value="AM">AM</option>
+                <option value="AF">AF</option>
+                <option value="IM">IM</option>
+                <option value="IF">IF</option>
+                <option value="CM">CM</option>
+                <option value="CF">CF</option>
+                <option value="WF">WF</option>
+                <option value="PWD">PWD</option>
+            </select>
 
-        <!-- Assessment Section -->
-        <div class="form-section">
-            <h4>Assessment of Candidate:</h4>
-            <label for="qualifications">Qualifications:</label>
+            <label for="preferred-alignment">8. Is the preferred candidate aligned to the highest priority?</label>
+            <select id="preferred-alignment" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <h4>9. Assessment of Candidate:</h4>
+            <label for="qualifications">9.1. Qualifications:</label>
             <textarea id="qualifications"></textarea>
 
-            <label for="prior-learning">Prior Learning:</label>
+            <label for="prior-learning">9.2. Prior Learning:</label>
             <textarea id="prior-learning"></textarea>
 
-            <label for="experience">Relevant Experience:</label>
+            <label for="experience">9.3. Relevant Experience:</label>
             <textarea id="experience"></textarea>
 
-            <label for="competencies">Acquirable Competencies:</label>
-            <textarea id="competencies"></textarea>
-        </div>
+            <label for="competencies">9.4. How long would it take for the candidate to acquire competencies?</label>
+            <select id="competencies">
+                <option value="1 Month">1 Month</option>
+                <option value="2 Months">2 Months</option>
+                <option value="3 Months">3 Months</option>
+                <option value="4 Months">4 Months</option>
+                <option value="5 Months">5 Months</option>
+                <option value="6 Months">6 Months</option>
+                <option value="7 Months">7 Months</option>
+                <option value="8 Months">8 Months</option>
+                <option value="9 Months">9 Months</option>
+                <option value="10 Months">10 Months</option>
+                <option value="11 Months">11 Months</option>
+                <option value="12 Months">12 Months</option>
+                <option value="More than 12 Months">More than 12 Months</option>
+                <option value="Not within a reasonable time">Not within a reasonable time</option>
+            </select>
 
-        <!-- Evidence Section -->
-        <div class="form-section">
-            <h4>Evidence:</h4>
-            <label for="job-profile">Job Profile:</label>
+            <h4>10. Record and Keep Evidence:</h4>
+            <label for="job-profile">10.1. Job Profile:</label>
             <textarea id="job-profile"></textarea>
 
-            <label for="advertising-channels">Advertising Channels:</label>
+            <label for="advertising-channels">10.2. Advertising Channels:</label>
             <textarea id="advertising-channels"></textarea>
 
-            <label for="response-numbers">Response Numbers:</label>
+            <label for="response-numbers">10.3. Response Numbers:</label>
             <textarea id="response-numbers"></textarea>
 
-            <label for="shortlist-demographics">Shortlist Demographics:</label>
+            <label for="shortlist-demographics">10.4.1. Shortlist Demographics:</label>
             <textarea id="shortlist-demographics"></textarea>
 
-            <label for="reasons-not-selected">Reasons for Not Selecting Highest Priority:</label>
+            <label for="reasons-not-selected">10.4.2. Reasons for Not Selecting Highest Priority:</label>
             <textarea id="reasons-not-selected"></textarea>
-        </div>
 
-        <!-- Sign-Off Section -->
-        <div class="form-section">
-            <h4>Sign-Off:</h4>
-            <label for="recruiting-manager">Recruiting Line Manager:</label>
+            <h4>11. Sign-Off:</h4>
+            <label for="recruiting-manager">11.1. Recruiting Line Manager:</label>
             <input type="text" id="recruiting-manager">
 
-            <label for="senior-manager">Senior Manager Responsible for EE:</label>
+            <label for="senior-manager">11.2. Senior Manager Responsible for EE:</label>
             <input type="text" id="senior-manager">
 
-            <label for="ceo">CEO or Designated Appointee:</label>
+            <label for="ceo">11.3. CEO or Designated Appointee:</label>
             <input type="text" id="ceo">
         </div>
 
         <button type="submit">Submit</button>
     </form>
 
-    <footer>
+    <footer class="footer-white">
         <p>© 2025 Your Company Name. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
