@@ -1,39 +1,87 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    line-height: 1.6;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  form {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  textarea, select, input, button {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f4f8fb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #003366;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+header img {
+  max-width: 50px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+header h1 {
+  display: inline-block;
+  font-size: 24px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+form {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form h3, form h4 {
+  color: #003366;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="date"], textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="file"] {
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00509e;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #f4f8fb;
+  color: #666;
+  font-size: 14px;
+}
