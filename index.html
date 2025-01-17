@@ -13,92 +13,111 @@
     </header>
 
     <form id="ee-form">
-        <h3>Purpose:</h3>
-        <p>The purpose of this tool is to document all relevant information and evidence in the situation where an appointment is made that is not in alignment with the EE Plan and Targets.</p>
-        <h3>Procedure:</h3>
-        <p>Prior to making an offer for employment and/or promotion where the selected candidate is not the number 1 preferred candidate based on the EE analysis and Ministerial Targets, complete the questions below and add in relevant supporting information.</p>
-        <h3>Reason:</h3>
-        <p>In the event of a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the seven justifiable reasons for not meeting specific targets.</p>
+        <!-- Purpose Section -->
+        <div class="form-section">
+            <h3>Purpose:</h3>
+            <p>The purpose of this tool is to document all relevant information and evidence in the situation where an appointment is made that is not in alignment with the EE Plan and Targets.</p>
+        </div>
 
-        <label for="date-completion">Date of Completion:</label>
-        <input type="date" id="date-completion" required>
+        <!-- Procedure Section -->
+        <div class="form-section">
+            <h3>Procedure:</h3>
+            <p>Prior to making an offer for employment and/or promotion where the selected candidate is not the number 1 preferred candidate based on the EE analysis and Ministerial Targets, complete the questions below and add in relevant supporting information.</p>
+        </div>
 
-        <label for="department">Department or Division:</label>
-        <input type="text" id="department" required>
+        <!-- Reason Section -->
+        <div class="form-section">
+            <h3>Reason:</h3>
+            <p>In the event of a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the seven justifiable reasons for not meeting specific targets.</p>
+        </div>
 
-        <label for="job-title">Job Title and Job Profile:</label>
-        <input type="text" id="job-title" required>
+        <!-- Questions Section -->
+        <div class="form-section">
+            <label for="date-completion">Date of Completion:</label>
+            <input type="date" id="date-completion" required>
 
-        <label for="occupational-level">Occupational Level:</label>
-        <select id="occupational-level" required>
-            <option value="Top Management">Top Management</option>
-            <option value="Senior Management">Senior Management</option>
-            <option value="Middle Management">Middle Management</option>
-            <option value="Junior Management">Junior Management</option>
-            <option value="Semi-skilled">Semi-skilled</option>
-            <option value="Unskilled">Unskilled</option>
-        </select>
+            <label for="department">Department or Division:</label>
+            <input type="text" id="department" required>
 
-        <label for="urgency-level">Urgency Level:</label>
-        <input type="text" id="urgency-level" required>
+            <label for="job-title">Job Title and Job Profile:</label>
+            <input type="text" id="job-title" required>
 
-        <label for="position-type">New Position or Replacement Position:</label>
-        <input type="text" id="position-type" required>
+            <label for="occupational-level">Occupational Level:</label>
+            <select id="occupational-level" required>
+                <option value="Top Management">Top Management</option>
+                <option value="Senior Management">Senior Management</option>
+                <option value="Middle Management">Middle Management</option>
+                <option value="Junior Management">Junior Management</option>
+                <option value="Semi-skilled">Semi-skilled</option>
+                <option value="Unskilled">Unskilled</option>
+            </select>
 
-        <label for="priority-highest">Targeted Sub-Race and Gender Groups (Highest Priority):</label>
-        <input type="text" id="priority-highest" required>
+            <label for="urgency-level">Urgency Level:</label>
+            <input type="text" id="urgency-level" required>
 
-        <label for="priority-next-highest">Targeted Sub-Race and Gender Groups (Next Highest):</label>
-        <input type="text" id="priority-next-highest">
+            <label for="position-type">New Position or Replacement Position:</label>
+            <input type="text" id="position-type" required>
 
-        <label for="priority-third-highest">Targeted Sub-Race and Gender Groups (Third Highest):</label>
-        <input type="text" id="priority-third-highest">
+            <label for="priority-highest">Targeted Sub-Race and Gender Groups (Highest Priority):</label>
+            <input type="text" id="priority-highest" required>
 
-        <label for="preferred-alignment">Preferred Candidate Aligned to Highest Priority:</label>
-        <input type="text" id="preferred-alignment" required>
+            <label for="priority-next-highest">Targeted Sub-Race and Gender Groups (Next Highest):</label>
+            <input type="text" id="priority-next-highest">
 
-        <h4>Assessment of Candidate:</h4>
-        <label for="qualifications">Qualifications:</label>
-        <textarea id="qualifications"></textarea>
+            <label for="priority-third-highest">Targeted Sub-Race and Gender Groups (Third Highest):</label>
+            <input type="text" id="priority-third-highest">
 
-        <label for="prior-learning">Prior Learning:</label>
-        <textarea id="prior-learning"></textarea>
+            <label for="preferred-alignment">Preferred Candidate Aligned to Highest Priority:</label>
+            <input type="text" id="preferred-alignment" required>
+        </div>
 
-        <label for="experience">Relevant Experience:</label>
-        <textarea id="experience"></textarea>
+        <!-- Assessment Section -->
+        <div class="form-section">
+            <h4>Assessment of Candidate:</h4>
+            <label for="qualifications">Qualifications:</label>
+            <textarea id="qualifications"></textarea>
 
-        <label for="competencies">Acquirable Competencies:</label>
-        <textarea id="competencies"></textarea>
+            <label for="prior-learning">Prior Learning:</label>
+            <textarea id="prior-learning"></textarea>
 
-        <h4>Evidence:</h4>
-        <label for="job-profile">Job Profile:</label>
-        <textarea id="job-profile"></textarea>
+            <label for="experience">Relevant Experience:</label>
+            <textarea id="experience"></textarea>
 
-        <label for="advertising-channels">Advertising Channels:</label>
-        <textarea id="advertising-channels"></textarea>
+            <label for="competencies">Acquirable Competencies:</label>
+            <textarea id="competencies"></textarea>
+        </div>
 
-        <label for="response-numbers">Response Numbers:</label>
-        <textarea id="response-numbers"></textarea>
+        <!-- Evidence Section -->
+        <div class="form-section">
+            <h4>Evidence:</h4>
+            <label for="job-profile">Job Profile:</label>
+            <textarea id="job-profile"></textarea>
 
-        <label for="shortlist-demographics">Shortlist Demographics:</label>
-        <textarea id="shortlist-demographics"></textarea>
+            <label for="advertising-channels">Advertising Channels:</label>
+            <textarea id="advertising-channels"></textarea>
 
-        <label for="reasons-not-selected">Reasons for Not Selecting Highest Priority:</label>
-        <textarea id="reasons-not-selected"></textarea>
+            <label for="response-numbers">Response Numbers:</label>
+            <textarea id="response-numbers"></textarea>
 
-        <h4>Sign-Off:</h4>
-        <label for="recruiting-manager">Recruiting Line Manager:</label>
-        <input type="text" id="recruiting-manager">
+            <label for="shortlist-demographics">Shortlist Demographics:</label>
+            <textarea id="shortlist-demographics"></textarea>
 
-        <label for="senior-manager">Senior Manager Responsible for EE:</label>
-        <input type="text" id="senior-manager">
+            <label for="reasons-not-selected">Reasons for Not Selecting Highest Priority:</label>
+            <textarea id="reasons-not-selected"></textarea>
+        </div>
 
-        <label for="ceo">CEO or Designated Appointee:</label>
-        <input type="text" id="ceo">
+        <!-- Sign-Off Section -->
+        <div class="form-section">
+            <h4>Sign-Off:</h4>
+            <label for="recruiting-manager">Recruiting Line Manager:</label>
+            <input type="text" id="recruiting-manager">
 
-        <h4>Upload Evidence:</h4>
-        <label for="evidence-upload">Upload Evidence:</label>
-        <input type="file" id="evidence-upload">
+            <label for="senior-manager">Senior Manager Responsible for EE:</label>
+            <input type="text" id="senior-manager">
+
+            <label for="ceo">CEO or Designated Appointee:</label>
+            <input type="text" id="ceo">
+        </div>
 
         <button type="submit">Submit</button>
     </form>
@@ -106,7 +125,5 @@
     <footer>
         <p>© 2025 Your Company Name. All rights reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
