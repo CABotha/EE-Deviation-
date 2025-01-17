@@ -1,104 +1,66 @@
-/* General Reset */
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
+  background-color: #f4f4f9;
   color: #333;
 }
 
-/* Header Styling */
-.header-white {
-  background-color: #ffffff;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #004080;
-}
-
-.logo {
-  height: 50px;
-}
-
-.title-blue {
-  color: #004080;
-  font-size: 24px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-/* Footer Styling */
-.footer-white {
-  background-color: #ffffff;
-  padding: 10px;
+header {
+  background-color: #004085;
+  color: white;
   text-align: center;
-  border-top: 2px solid #004080;
-  color: #333;
+  padding: 20px 0;
 }
 
-/* Form Section Styling */
-.form-section {
-  margin: 20px;
+header img {
+  height: 50px;
+  margin-right: 20px;
+}
+
+form {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h3, h4 {
-  color: #004080;
-  margin-bottom: 10px;
+.form-section {
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #333;
 }
 
-input, select, textarea {
+input, select, textarea, button {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #d9e2ec;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-textarea {
-  height: 80px;
-  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
 }
 
 button {
-  background-color: #004080;
-  color: #ffffff;
+  background-color: #004085;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
   cursor: pointer;
+  padding: 10px 20px;
 }
 
 button:hover {
-  background-color: #003366;
+  background-color: #0056b3;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .form-section {
-      margin: 10px;
-      padding: 15px;
-  }
-
-  input, select, textarea {
-      font-size: 12px;
-  }
-
-  button {
-      font-size: 14px;
-      padding: 8px 16px;
-  }
+footer {
+  text-align: center;
+  background-color: white;
+  padding: 10px 0;
+  color: #004085;
 }
