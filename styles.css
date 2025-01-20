@@ -115,28 +115,77 @@ select:hover {
   color: #666;
 }
 
-/* Button Styles */
-button {
-  background-color: #2e5aab;
-  color: white;
-  border: none;
+/* Button Group Styles */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.button-group button {
+  flex: 1;
   padding: 15px 30px;
   font-size: 16px;
   font-weight: bold;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 20px;
   text-transform: uppercase;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-button:hover {
+/* Individual Button Styles */
+#export-excel {
+  background-color: #217346; /* Excel green */
+  color: white;
+}
+
+#export-excel:hover {
+  background-color: #1a5c38;
+  transform: translateY(-2px);
+}
+
+#export-pdf {
+  background-color: #dc3545; /* PDF red */
+  color: white;
+}
+
+#export-pdf:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+button[type="submit"] {
+  background-color: #2e5aab;
+  color: white;
+}
+
+button[type="submit"]:hover {
   background-color: #224a8a;
+  transform: translateY(-2px);
 }
 
-button:active {
-  transform: translateY(1px);
+/* Focus States */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2e5aab;
+  box-shadow: 0 0 5px rgba(46, 90, 171, 0.2);
+}
+
+/* Required Field Indicator */
+input:required,
+select:required,
+textarea:required {
+  border-left: 3px solid #2e5aab;
+}
+
+/* Error State */
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: #ff4444;
 }
 
 /* Footer Styles */
@@ -173,27 +222,36 @@ footer {
   .form-section {
       padding: 15px;
   }
+
+  .button-group {
+      flex-direction: column;
+  }
+
+  .button-group button {
+      width: 100%;
+      margin-bottom: 10px;
+  }
 }
 
-/* Focus States */
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: #2e5aab;
-  box-shadow: 0 0 5px rgba(46, 90, 171, 0.2);
-}
+/* Print Styles */
+@media print {
+  body {
+      background: white;
+  }
 
-/* Required Field Indicator */
-input:required,
-select:required,
-textarea:required {
-  border-left: 3px solid #2e5aab;
-}
+  form {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+  }
 
-/* Error State */
-input:invalid,
-select:invalid,
-textarea:invalid {
-  border-color: #ff4444;
+  .button-group {
+      display: none;
+  }
+
+  footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+  }
 }

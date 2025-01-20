@@ -13,8 +13,6 @@
     </header>
 
     <form id="ee-form">
-        <!-- Previous sections remain the same until Evidence Section -->
-        
         <!-- Purpose Section -->
         <div class="form-section">
             <h3>Purpose:</h3>
@@ -186,11 +184,11 @@
             <label for="shortlist-demographics">10.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
             <textarea id="shortlist-demographics"></textarea>
 
-            <label for="non-selection-reason"><strong>10.4.2 The primary reason why the highest priority candidate was not selected:</strong></label>
+            <label for="non-selection-reason">10.4.2 The primary reason why the highest priority candidate was not selected:</label>
             <select id="non-selection-reason" required>
                 <option value="">Please select a reason</option>
-                <option value="Insufficient Recruitment Opportunities"><strong>1. Insufficient Recruitment Opportunities</strong></option>
-                <option value="Insufficient Promotion Opportunities"><strong>2. Insufficient Promotion Opportunities</strong></option>
+                <option value="Insufficient Recruitment Opportunities">1. Insufficient Recruitment Opportunities</option>
+                <option value="Insufficient Promotion Opportunities">2. Insufficient Promotion Opportunities</option>
                 <option value="Insufficient Target Individuals">3. Insufficient Target Individuals from the designated groups with the relevant qualifications, skills and experience</option>
                 <option value="CCMA Awards/Court Order">4. CCMA Awards/Court Order</option>
                 <option value="Transfer of Business">5. Transfer of Business</option>
@@ -213,7 +211,12 @@
             <input type="text" id="ceo" required>
         </div>
 
-        <button type="submit">Submit and Export to Excel</button>
+        <!-- Export Buttons -->
+        <div class="button-group">
+            <button type="button" id="export-excel">Export to Excel</button>
+            <button type="button" id="export-pdf">Export to PDF</button>
+            <button type="submit">Submit Form</button>
+        </div>
     </form>
 
     <footer>
@@ -222,6 +225,8 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
