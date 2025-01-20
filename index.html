@@ -46,6 +46,7 @@
 
             <label for="occupational-level">4. Occupational level of the said position:</label>
             <select id="occupational-level" required>
+                <option value="">Select occupational level</option>
                 <option value="Top Management">Top Management</option>
                 <option value="Senior Management">Senior Management</option>
                 <option value="Middle Management">Middle Management</option>
@@ -59,6 +60,7 @@
 
             <label for="position-type">6. New position or replacement position:</label>
             <select id="position-type" required>
+                <option value="">Select position type</option>
                 <option value="New">New</option>
                 <option value="Replacement">Replacement</option>
             </select>
@@ -70,6 +72,7 @@
 
             <label for="requires-designated">7.1 Is the position being considered one that requires a specific designated person to make progress toward and/or achieve the targets?</label>
             <select id="requires-designated" required>
+                <option value="">Select answer</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -79,6 +82,7 @@
 
             <label for="priority-highest">7.4.1 Highest Priority Target Group:</label>
             <select id="priority-highest" required>
+                <option value="">Select group</option>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -91,6 +95,7 @@
 
             <label for="priority-next">7.4.2 Next Highest Priority Target Group:</label>
             <select id="priority-next">
+                <option value="">Select group</option>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -103,6 +108,7 @@
 
             <label for="priority-third">7.4.3 Third Highest Priority Target Group:</label>
             <select id="priority-third">
+                <option value="">Select group</option>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -115,6 +121,7 @@
 
             <label for="aligned-highest">8. Is the preferred candidate for the position aligned to the "highest" priority sub-race and gender group?</label>
             <select id="aligned-highest" required>
+                <option value="">Select answer</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
@@ -124,6 +131,7 @@
 
             <label for="preferred-candidate-group">8.3 What is the sub-race and gender group of the preferred candidate:</label>
             <select id="preferred-candidate-group" required>
+                <option value="">Select group</option>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
                 <option value="IM">IM</option>
@@ -151,6 +159,7 @@
 
             <label for="competency-time">9.4 How long would it take for the candidate to acquire the competencies?</label>
             <select id="competency-time" required>
+                <option value="">Select timeframe</option>
                 <option value="1">1 Month</option>
                 <option value="2">2 Months</option>
                 <option value="3">3 Months</option>
@@ -186,7 +195,7 @@
 
             <label for="non-selection-reason">10.4.2 The primary reason why the highest priority candidate was not selected:</label>
             <select id="non-selection-reason" required>
-                <option value="">Please select a reason</option>
+                <option value="">Select reason</option>
                 <option value="Insufficient Recruitment Opportunities">1. Insufficient Recruitment Opportunities</option>
                 <option value="Insufficient Promotion Opportunities">2. Insufficient Promotion Opportunities</option>
                 <option value="Insufficient Target Individuals">3. Insufficient Target Individuals from the designated groups with the relevant qualifications, skills and experience</option>
@@ -213,9 +222,8 @@
 
         <!-- Export Buttons -->
         <div class="button-group">
-            <button type="button" id="export-excel">Export to Excel</button>
-            <button type="button" id="export-pdf">Export to PDF</button>
-            <button type="submit">Submit Form</button>
+            <button type="button" id="export-excel" class="export-btn">Export to Excel</button>
+            <button type="button" id="export-pdf" class="export-btn">Export to PDF</button>
         </div>
     </form>
 
