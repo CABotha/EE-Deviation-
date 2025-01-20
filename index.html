@@ -13,6 +13,8 @@
     </header>
 
     <form id="ee-form">
+        <!-- Previous sections remain the same until Evidence Section -->
+        
         <!-- Purpose Section -->
         <div class="form-section">
             <h3>Purpose:</h3>
@@ -184,8 +186,17 @@
             <label for="shortlist-demographics">10.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
             <textarea id="shortlist-demographics"></textarea>
 
-            <label for="non-selection-reason">10.4.2 The primary reason(s) why the highest priority candidate was not selected:</label>
-            <textarea id="non-selection-reason"></textarea>
+            <label for="non-selection-reason"><strong>10.4.2 The primary reason why the highest priority candidate was not selected:</strong></label>
+            <select id="non-selection-reason" required>
+                <option value="">Please select a reason</option>
+                <option value="Insufficient Recruitment Opportunities"><strong>1. Insufficient Recruitment Opportunities</strong></option>
+                <option value="Insufficient Promotion Opportunities"><strong>2. Insufficient Promotion Opportunities</strong></option>
+                <option value="Insufficient Target Individuals">3. Insufficient Target Individuals from the designated groups with the relevant qualifications, skills and experience</option>
+                <option value="CCMA Awards/Court Order">4. CCMA Awards/Court Order</option>
+                <option value="Transfer of Business">5. Transfer of Business</option>
+                <option value="Merger/Acquisitions">6. Merger/Acquisitions</option>
+                <option value="Impact on Business Economic Circumstances">7. Impact on Business Economic Circumstances</option>
+            </select>
         </div>
 
         <!-- Sign-Off Section -->
