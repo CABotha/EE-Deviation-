@@ -3,6 +3,76 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('ee-form');
     const excelBtn = document.getElementById('export-excel');
     const pdfBtn = document.getElementById('export-pdf');
+    const addCompetencyBtn = document.getElementById('add-competency-field');
+    const addSignoffBtn = document.getElementById('add-signoff-field');
+    let competencyCounter = 1; // Start at 1 because we already have 0
+    let signoffCounter = 1; // Start at 1 because we already have 0
+
+    // Add another competency time field
+    addCompetencyBtn.addEventListener('click', function() {
+        const container = document.getElementById('competency-time-container');
+        const newSection = document.createElement('div');
+        newSection.className = 'competency-time-section';
+        
+        newSection.innerHTML = `
+            <label for="competency-time-${competencyCounter}">9.4 How long would it take for the candidate to acquire the competencies?</label>
+            <select id="competency-time-${competencyCounter}" class="competency-time" required>
+                <option value="">Select timeframe</option>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+                <option value="7">7 Months</option>
+                <option value="8">8 Months</option>
+                <option value="9">9 Months</option>
+                <option value="10">10 Months</option>
+                <option value="11">11 Months</option>
+                <option value="12">12 Months</option>
+                <option value="more">More than 12 Months</option>
+                <option value="not-reasonable">Not within a reasonable time period</option>
+            </select>
+            
+            <label for="candidate-description-${competencyCounter}">Candidate Description/Name:</label>
+            <input type="text" id="candidate-description-${competencyCounter}" class="candidate-description">
+            
+            <button type="button" class="remove-field-btn">Remove</button>
+        `;
+        
+        container.appendChild(newSection);
+        competencyCounter++;
+        
+        // Add event listener to the new remove button
+        newSection.querySelector('.remove-field-btn').addEventListener('click', function() {
+            newSection.remove();
+        });
+    });
+    
+    // Add another signoff field
+    addSignoffBtn.addEventListener('click', function() {
+        const container = document.getElementById('signoff-container');
+        const newSection = document.createElement('div');
+        newSection.className = 'signoff-section';
+        
+        newSection.innerHTML = `
+            <label for="signoff-position-${signoffCounter}">Position Title:</label>
+            <input type="text" id="signoff-position-${signoffCounter}" class="signoff-position">
+            
+            <label for="signoff-name-${signoffCounter}">Name:</label>
+            <input type="text" id="signoff-name-${signoffCounter}" class="signoff-name">
+            
+            <button type="button" class="remove-field-btn">Remove</button>
+        `;
+        
+        container.appendChild(newSection);
+        signoffCounter++;
+        
+        // Add event listener to the new remove button
+        newSection.querySelector('.remove-field-btn').addEventListener('click', function() {
+            newSection.remove();
+        });
+    });
 
     // Get current date formatted as YYYY-MM-DD
     function getFormattedDate() {
@@ -11,6 +81,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Collect form data
     function getFormData() {
+        // Get all competency time entries
+        const competencyTimeEntries = Array.from(document.querySelectorAll('.competency-time-section')).map((section, index) => {
+            const timeSelect = section.querySelector(`.competency-time`);
+            const description = section.querySelector(`.candidate-description`);
+            return {
+                time: timeSelect ? timeSelect.value || '-' : '-',
+                description: description ? description.value || '-' : '-'
+            };
+        });
+
+        // Get all signoff entries
+        const signoffEntries = Array.from(document.querySelectorAll('.signoff-section')).map((section, index) => {
+            const position = section.querySelector(`.signoff-position`);
+            const name = section.querySelector(`.signoff-name`);
+            return {
+                position: position ? position.value || '-' : '-',
+                name: name ? name.value || '-' : '-'
+            };
+        });
+
         const formData = {
             "1. Date of Completion": document.getElementById('date-completion').value || '-',
             "2. Department/Division": document.getElementById('department').value || '-',
@@ -27,16 +117,24 @@ document.addEventListener('DOMContentLoaded', function() {
             "9.1 Qualifications": document.getElementById('qualifications').value || '-',
             "9.2 Prior Learning": document.getElementById('prior-learning').value || '-',
             "9.3 Relevant Experience": document.getElementById('relevant-experience').value || '-',
-            "9.4 Time to Acquire Competencies": document.getElementById('competency-time').value || '-',
             "10.1 Job Profile": document.getElementById('job-profile').value || '-',
             "10.2 Advertising Channels": document.getElementById('advertising-channels').value || '-',
             "10.3 Response Numbers": document.getElementById('response-numbers').value || '-',
             "10.4.1 Shortlist Demographics": document.getElementById('shortlist-demographics').value || '-',
-            "10.4.2 Non-selection Reason": document.getElementById('non-selection-reason').value || '-',
-            "11.1 Recruiting Manager": document.getElementById('recruiting-manager').value || '-',
-            "11.2 Senior EE Manager": document.getElementById('senior-manager').value || '-',
-            "11.3 CEO/Appointee": document.getElementById('ceo').value || '-'
+            "10.4.2 Non-selection Reason": document.getElementById('non-selection-reason').value || '-'
         };
+
+        // Add competency time entries to form data
+        competencyTimeEntries.forEach((entry, index) => {
+            formData[`9.4 Candidate ${index+1} Time to Acquire Competencies`] = entry.time;
+            formData[`9.4 Candidate ${index+1} Description`] = entry.description;
+        });
+
+        // Add signoff entries to form data
+        signoffEntries.forEach((entry, index) => {
+            formData[`Sign-off ${index+1} Position`] = entry.position;
+            formData[`Sign-off ${index+1} Name`] = entry.name;
+        });
 
         return formData;
     }

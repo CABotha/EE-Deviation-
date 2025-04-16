@@ -144,10 +144,10 @@
             </select>
         </div>
 
-        <!-- Candidate Assessment -->
+        <!-- Candidate Assessment - Updated Section -->
         <div class="form-section">
-            <h3>Justification and assessment of the Highest Ranking Candidate</h3>
-            <p>You will need to substantiate why individuals from the three highest priority targeted groups were not suitable for the job.</p>
+            <h3>Justification and assessment of why Highest Ranking Candidate is not from an EE Designated Group</h3>
+            <p>Substantiate why each of the EE Targeted Candidates were not successful or suitable across all the below reasons.</p>
 
             <label for="qualifications">9.1 Qualifications:</label>
             <textarea id="qualifications"></textarea>
@@ -157,25 +157,35 @@
 
             <label for="relevant-experience">9.3 Relevant experience:</label>
             <textarea id="relevant-experience"></textarea>
-
-            <label for="competency-time">9.4 How long would it take for the candidate to acquire the competencies?</label>
-            <select id="competency-time" required>
-                <option value="">Select timeframe</option>
-                <option value="1">1 Month</option>
-                <option value="2">2 Months</option>
-                <option value="3">3 Months</option>
-                <option value="4">4 Months</option>
-                <option value="5">5 Months</option>
-                <option value="6">6 Months</option>
-                <option value="7">7 Months</option>
-                <option value="8">8 Months</option>
-                <option value="9">9 Months</option>
-                <option value="10">10 Months</option>
-                <option value="11">11 Months</option>
-                <option value="12">12 Months</option>
-                <option value="more">More than 12 Months</option>
-                <option value="not-reasonable">Not within a reasonable time period</option>
-            </select>
+            
+            <!-- Container for repeatable competency time sections -->
+            <div id="competency-time-container">
+                <div class="competency-time-section">
+                    <label for="competency-time-0">9.4 How long would it take for the candidate to acquire the competencies?</label>
+                    <select id="competency-time-0" class="competency-time" required>
+                        <option value="">Select timeframe</option>
+                        <option value="1">1 Month</option>
+                        <option value="2">2 Months</option>
+                        <option value="3">3 Months</option>
+                        <option value="4">4 Months</option>
+                        <option value="5">5 Months</option>
+                        <option value="6">6 Months</option>
+                        <option value="7">7 Months</option>
+                        <option value="8">8 Months</option>
+                        <option value="9">9 Months</option>
+                        <option value="10">10 Months</option>
+                        <option value="11">11 Months</option>
+                        <option value="12">12 Months</option>
+                        <option value="more">More than 12 Months</option>
+                        <option value="not-reasonable">Not within a reasonable time period</option>
+                    </select>
+                    
+                    <label for="candidate-description-0">Candidate Description/Name:</label>
+                    <input type="text" id="candidate-description-0" class="candidate-description">
+                </div>
+            </div>
+            
+            <button type="button" id="add-competency-field" class="add-field-btn">Add Another Candidate</button>
         </div>
 
         <!-- Evidence Section -->
@@ -194,7 +204,7 @@
             <label for="shortlist-demographics">10.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
             <textarea id="shortlist-demographics"></textarea>
 
-            <label for="non-selection-reason">10.4.2 The primary reason why the highest priority candidate was not selected:</label>
+            <label for="non-selection-reason">10.4.2 The primary reason why the highest priority EE Targeted candidate was not selected:</label>
             <select id="non-selection-reason" required>
                 <option value="">Select reason</option>
                 <option value="Insufficient Recruitment Opportunities">1. Insufficient Recruitment Opportunities</option>
@@ -207,18 +217,21 @@
             </select>
         </div>
 
-        <!-- Sign-Off Section -->
+        <!-- Sign-Off Section - Updated to be dynamic -->
         <div class="form-section">
             <h3>Sign-off</h3>
-
-            <label for="recruiting-manager">11.1 Recruiting line manager:</label>
-            <input type="text" id="recruiting-manager" required>
-
-            <label for="senior-manager">11.2 Senior manager responsible for EE:</label>
-            <input type="text" id="senior-manager" required>
-
-            <label for="ceo">11.3 CEO or their designated appointee:</label>
-            <input type="text" id="ceo" required>
+            
+            <div id="signoff-container">
+                <div class="signoff-section">
+                    <label for="signoff-position-0">Position Title:</label>
+                    <input type="text" id="signoff-position-0" class="signoff-position">
+                    
+                    <label for="signoff-name-0">Name:</label>
+                    <input type="text" id="signoff-name-0" class="signoff-name">
+                </div>
+            </div>
+            
+            <button type="button" id="add-signoff-field" class="add-field-btn">Add Another Signatory</button>
         </div>
 
         <!-- Export Buttons -->
