@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 },
                 {
-                    title: "Candidate Assessment",
+                    title: "Candidate Assessment and Justification",
                     fields: [
                         { label: "9.1 Qualifications", value: document.getElementById('qualifications').value || '-' },
                         { label: "9.2 Prior Learning", value: document.getElementById('prior-learning').value || '-' },
@@ -169,30 +169,39 @@ document.addEventListener('DOMContentLoaded', function() {
     function flattenFormData(structuredData) {
         const flatData = {};
         
-        // Process each section
+        // First collect all fields in the correct order
+        const orderedFields = [];
+        
+        // Process each section and maintain proper ordering
         structuredData.sections.forEach(section => {
             // Add basic fields
             if (section.fields) {
                 section.fields.forEach(field => {
-                    flatData[field.label] = field.value;
+                    orderedFields.push({ key: field.label, value: field.value });
                 });
             }
             
-            // Add competency time entries
-            if (section.competencyTimeEntries) {
+            // Add competency time entries immediately after section 9.3 if this is the candidate assessment section
+            if (section.competencyTimeEntries && section.title.includes("Candidate Assessment")) {
                 section.competencyTimeEntries.forEach((entry, index) => {
-                    flatData[`${entry.label} Time to Acquire Competencies`] = entry.time;
-                    flatData[`${entry.label} Description`] = entry.description;
+                    orderedFields.push({ key: `${entry.label} Time to Acquire Competencies`, value: entry.time });
+                    orderedFields.push({ key: `${entry.label} Description`, value: entry.description });
                 });
             }
-            
-            // Add signoff entries
-            if (section.signoffEntries) {
-                section.signoffEntries.forEach((entry, index) => {
-                    flatData[`${entry.label} Position`] = entry.position;
-                    flatData[`${entry.label} Name`] = entry.name;
-                });
-            }
+        });
+        
+        // Add signoff entries at the end
+        const signoffSection = structuredData.sections.find(section => section.title === "Sign-off");
+        if (signoffSection && signoffSection.signoffEntries) {
+            signoffSection.signoffEntries.forEach((entry, index) => {
+                orderedFields.push({ key: `${entry.label} Position`, value: entry.position });
+                orderedFields.push({ key: `${entry.label} Name`, value: entry.name });
+            });
+        }
+        
+        // Convert ordered fields to flat data
+        orderedFields.forEach(item => {
+            flatData[item.key] = item.value;
         });
         
         return flatData;
@@ -236,7 +245,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 { wch: 60 }  // Value column
             ];
             
-            // Create a worksheet with all data in a structured format
+            // Create worksheet for summary view (flat table format)
+            const flatData = flattenFormData(structuredData);
+            const summaryData = [['Field', 'Value']];
+            
+            // Add all fields in the flattened data (which preserves proper ordering)
+            Object.entries(flatData).forEach(([key, value]) => {
+                summaryData.push([key, value]);
+            });
+            
+            // Create summary worksheet
+            const summaryWs = XLSX.utils.aoa_to_sheet(summaryData);
+            summaryWs['!cols'] = columnWidths;
+            
+            // Apply styles to summary sheet
+            const summaryRange = XLSX.utils.decode_range(summaryWs['!ref']);
+            for (let R = summaryRange.s.r; R <= summaryRange.e.r; ++R) {
+                for (let C = summaryRange.s.c; C <= summaryRange.e.c; ++C) {
+                    const address = XLSX.utils.encode_cell({ r: R, c: C });
+                    if (!summaryWs[address]) continue;
+                    
+                    if (R === 0) {
+                        // Header row
+                        summaryWs[address].s = getCellStyle('header');
+                    } else if (C === 0) {
+                        // Label column
+                        summaryWs[address].s = getCellStyle('label');
+                    } else {
+                        // Value column
+                        summaryWs[address].s = getCellStyle('value');
+                    }
+                }
+            }
+            
+            // Add summary worksheet as the first sheet (most important view)
+            XLSX.utils.book_append_sheet(wb, summaryWs, "EE Deviation Record");
+            
+            // Create a detailed worksheet with all data in a structured format
             const mainWsData = [];
             
             // Add title
@@ -255,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                // Add competency time entries
+                // Add competency time entries immediately after the basic fields in the candidate section
                 if (section.competencyTimeEntries) {
                     section.competencyTimeEntries.forEach(entry => {
                         mainWsData.push([`${entry.label}`, '']);
@@ -277,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mainWsData.push([]);
             });
             
-            // Create worksheet
+            // Create detailed worksheet
             const mainWs = XLSX.utils.aoa_to_sheet(mainWsData);
             
             // Set column widths
@@ -359,49 +404,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Add main worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, mainWs, "EE Deviation Record");
-            
-            // Generate summary worksheet with just the base information
-            const summaryData = [['Field', 'Value']];
-            
-            // Flatten all basic fields for the summary
-            structuredData.sections.forEach(section => {
-                if (section.fields) {
-                    section.fields.forEach(field => {
-                        summaryData.push([field.label, field.value]);
-                    });
-                }
-            });
-            
-            // Create summary worksheet
-            const summaryWs = XLSX.utils.aoa_to_sheet(summaryData);
-            
-            // Apply styles to summary sheet
-            const summaryRange = XLSX.utils.decode_range(summaryWs['!ref']);
-            for (let R = summaryRange.s.r; R <= summaryRange.e.r; ++R) {
-                for (let C = summaryRange.s.c; C <= summaryRange.e.c; ++C) {
-                    const address = XLSX.utils.encode_cell({ r: R, c: C });
-                    if (!summaryWs[address]) continue;
-                    
-                    if (R === 0) {
-                        // Header row
-                        summaryWs[address].s = getCellStyle('header');
-                    } else if (C === 0) {
-                        // Label column
-                        summaryWs[address].s = getCellStyle('label');
-                    } else {
-                        // Value column
-                        summaryWs[address].s = getCellStyle('value');
-                    }
-                }
-            }
-            
-            // Set column widths for summary sheet
-            summaryWs['!cols'] = columnWidths;
-            
-            // Add summary worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, summaryWs, "Summary");
+            // Add detailed worksheet as the second sheet
+            XLSX.utils.book_append_sheet(wb, mainWs, "Detailed View");
             
             // Generate filename and save
             const fileName = `EE_Deviation_Record_${getFormattedDate()}.xlsx`;
@@ -418,6 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function exportToPDF() {
         try {
             const structuredData = getStructuredFormData();
+            const flatData = flattenFormData(structuredData); // Get properly ordered data
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
@@ -430,180 +435,72 @@ document.addEventListener('DOMContentLoaded', function() {
                 creator: 'EE Form System'
             });
 
-            // Define styles
-            const styles = {
-                title: { fontSize: 16, fontStyle: 'bold', textColor: [46, 90, 171] },
-                date: { fontSize: 10, textColor: [102, 102, 102] },
-                sectionTitle: { fontSize: 12, fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [46, 90, 171] },
-                fieldLabel: { fontSize: 10, fontStyle: 'bold' },
-                fieldValue: { fontSize: 10 },
-                pageFooter: { fontSize: 8, textColor: [102, 102, 102] }
-            };
-
-            // Start position
-            let yPos = 20;
-            const margin = 15;
-            const pageWidth = doc.internal.pageSize.width;
-            const contentWidth = pageWidth - (margin * 2);
-
-            // Helper function to add page number footer
-            function addFooter() {
-                doc.setFontSize(styles.pageFooter.fontSize);
-                doc.setTextColor(...styles.pageFooter.textColor);
-                doc.text('Global Business Solutions - Employment Equity Deviation Record', 
-                    margin, doc.internal.pageSize.height - 10);
-                doc.text(`Page ${doc.internal.getNumberOfPages()}`, 
-                    pageWidth - margin - 15, doc.internal.pageSize.height - 10);
-            }
-
-            // Helper function to check if we need a new page
-            function checkNewPage(heightNeeded) {
-                const currentPage = doc.internal.getNumberOfPages();
-                if (yPos + heightNeeded > doc.internal.pageSize.height - 20) {
-                    addFooter();
-                    doc.addPage();
-                    yPos = 20;
-                    return true;
-                }
-                return false;
-            }
-
             // Add title
-            doc.setFontSize(styles.title.fontSize);
-            doc.setFont(undefined, styles.title.fontStyle);
-            doc.setTextColor(...styles.title.textColor);
-            doc.text(structuredData.documentInfo.title, pageWidth / 2, yPos, { align: 'center' });
-            yPos += 10;
-
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(46, 90, 171);
+            doc.text('Employment Equity Deviation Record', 105, 15, { align: 'center' });
+            
             // Add date
-            doc.setFontSize(styles.date.fontSize);
+            doc.setFontSize(10);
             doc.setFont(undefined, 'normal');
-            doc.setTextColor(...styles.date.textColor);
-            doc.text(`Generated: ${structuredData.documentInfo.generatedDate}`, pageWidth / 2, yPos, { align: 'center' });
-            yPos += 15;
+            doc.setTextColor(102, 102, 102);
+            doc.text(`Generated: ${getFormattedDate()}`, 105, 25, { align: 'center' });
 
-            // Process each section
-            structuredData.sections.forEach((section, sectionIndex) => {
-                // Check if we need a new page for the section
-                checkNewPage(40);  // Estimate height for section header + first few fields
-
-                // Add section header with background
-                doc.setFillColor(...styles.sectionTitle.fillColor);
-                doc.rect(margin, yPos - 5, contentWidth, 10, 'F');
-                doc.setTextColor(...styles.sectionTitle.textColor);
-                doc.setFontSize(styles.sectionTitle.fontSize);
-                doc.setFont(undefined, styles.sectionTitle.fontStyle);
-                doc.text(section.title, margin + 5, yPos, { align: 'left' });
-                yPos += 10;
-
-                // Add basic fields
-                if (section.fields) {
-                    section.fields.forEach(field => {
-                        // Format long text values
-                        let valueLines = [];
-                        if (field.value.length > 80) {
-                            // Split long values into multiple lines for readability
-                            const chunks = field.value.match(/.{1,80}(?:\s|$)/g);
-                            if (chunks) valueLines = chunks;
-                            else valueLines = [field.value];
-                        } else {
-                            valueLines = [field.value];
-                        }
-
-                        // Check if we need a new page
-                        const fieldHeight = 5 + (valueLines.length * 5);
-                        checkNewPage(fieldHeight);
-
-                        // Add field label
-                        doc.setTextColor(0, 0, 0);
-                        doc.setFontSize(styles.fieldLabel.fontSize);
-                        doc.setFont(undefined, styles.fieldLabel.fontStyle);
-                        doc.text(field.label, margin, yPos);
-                        yPos += 5;
-
-                        // Add field value
-                        doc.setFontSize(styles.fieldValue.fontSize);
-                        doc.setFont(undefined, 'normal');
-                        valueLines.forEach(line => {
-                            doc.text(line, margin + 5, yPos);
-                            yPos += 5;
-                        });
-
-                        yPos += 2; // Add a little space after each field
-                    });
+            // Create a clean table with properly ordered data
+            const tableData = Object.entries(flatData).map(([key, value]) => {
+                // Process long text by breaking into multiple lines if needed
+                let processedValue = value;
+                if (typeof value === 'string' && value.length > 80) {
+                    processedValue = value.match(/.{1,80}(?:\s|$)/g).join('\n');
                 }
-
-                // Add competency time entries
-                if (section.competencyTimeEntries) {
-                    section.competencyTimeEntries.forEach((entry, index) => {
-                        // Check if we need a new page
-                        checkNewPage(25);
-
-                        // Add entry header
-                        doc.setFontSize(styles.fieldLabel.fontSize);
-                        doc.setFont(undefined, styles.fieldLabel.fontStyle);
-                        doc.text(entry.label, margin, yPos);
-                        yPos += 5;
-
-                        // Time to Acquire
-                        doc.setFontSize(styles.fieldLabel.fontSize);
-                        doc.setFont(undefined, 'normal');
-                        doc.text(`Time to Acquire Competencies: ${entry.time}`, margin + 5, yPos);
-                        yPos += 5;
-
-                        // Description
-                        let descLines = [];
-                        if (entry.description.length > 80) {
-                            const chunks = entry.description.match(/.{1,80}(?:\s|$)/g);
-                            if (chunks) descLines = chunks;
-                            else descLines = [entry.description];
-                        } else {
-                            descLines = [entry.description];
-                        }
-
-                        doc.text(`Candidate Description/Name:`, margin + 5, yPos);
-                        yPos += 5;
-                        
-                        descLines.forEach(line => {
-                            doc.text(line, margin + 10, yPos);
-                            yPos += 5;
-                        });
-
-                        yPos += 2; // Add a little space after each entry
-                    });
-                }
-
-                // Add signoff entries
-                if (section.signoffEntries) {
-                    section.signoffEntries.forEach((entry, index) => {
-                        // Check if we need a new page
-                        checkNewPage(20);
-
-                        // Add entry header
-                        doc.setFontSize(styles.fieldLabel.fontSize);
-                        doc.setFont(undefined, styles.fieldLabel.fontStyle);
-                        doc.text(entry.label, margin, yPos);
-                        yPos += 5;
-
-                        // Position
-                        doc.setFontSize(styles.fieldLabel.fontSize);
-                        doc.setFont(undefined, 'normal');
-                        doc.text(`Position: ${entry.position}`, margin + 5, yPos);
-                        yPos += 5;
-
-                        // Name
-                        doc.text(`Name: ${entry.name}`, margin + 5, yPos);
-                        yPos += 5;
-
-                        yPos += 2; // Add a little space after each entry
-                    });
-                }
-
-                yPos += 5; // Add space after each section
+                return [key, processedValue];
             });
 
-            // Add footer on the last page
-            addFooter();
+            // Add table with improved styling
+            doc.autoTable({
+                startY: 30,
+                head: [['Field', 'Value']],
+                body: tableData,
+                headStyles: {
+                    fillColor: [46, 90, 171],
+                    textColor: 255,
+                    fontSize: 12,
+                    fontStyle: 'bold',
+                    cellPadding: 5
+                },
+                bodyStyles: {
+                    fontSize: 10,
+                    cellPadding: 5
+                },
+                alternateRowStyles: {
+                    fillColor: [240, 245, 255]
+                },
+                columnStyles: {
+                    0: { 
+                        cellWidth: 80,
+                        fontStyle: 'bold',
+                        fillColor: [230, 239, 249]
+                    },
+                    1: { 
+                        cellWidth: 'auto' 
+                    }
+                },
+                margin: { top: 30, right: 15, bottom: 20, left: 15 },
+                theme: 'grid',
+                tableWidth: 'auto',
+                didDrawPage: function(data) {
+                    // Add footer on each page
+                    doc.setFontSize(8);
+                    doc.setTextColor(102, 102, 102);
+                    doc.text('Global Business Solutions - Employment Equity Deviation Record', 
+                        data.settings.margin.left,
+                        doc.internal.pageSize.height - 10);
+                    doc.text(`Page ${data.pageCount}`, 
+                        doc.internal.pageSize.width - 20,
+                        doc.internal.pageSize.height - 10);
+                }
+            });
 
             // Generate filename and save
             const fileName = `EE_Deviation_Record_${getFormattedDate()}.pdf`;
