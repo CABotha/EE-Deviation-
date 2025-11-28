@@ -16,19 +16,13 @@
         <!-- Purpose Section -->
         <div class="form-section">
             <h3>Purpose:</h3>
-            <p>The purpose of this tool is to document all relevant information and evidence in the situation where an appointment is made that is not in alignment with the EE Plan and Targets.</p>
+            <p>The purpose of this tool is to document relevant information and evidence in the situation where an appointment (recruitment or promotion) is made that is not in alignment with the prioritised EE Plan and its accompanying Targets. Once completed, the information captured in this tool can be exported and saved in order to create a portfolio that could be used in justifying deviations from the 7 justifiable reasons contained in the EE Regulations. It may be useful as evidence during DG Reviews and litigation as well as in providing feedback to EE Committees and other stakeholders.</p>
         </div>
 
         <!-- Procedure Section -->
         <div class="form-section">
             <h3>Procedure:</h3>
-            <p>Prior to making an offer for employment and/or promotion where the selected candidate is not the number 1 preferred candidate based on the EE analysis and Ministerial Targets, complete the questions below and add in relevant supporting information.</p>
-        </div>
-
-        <!-- Reason Section -->
-        <div class="form-section">
-            <h3>Reason:</h3>
-            <p>In the event that there is a DG Review and/or other inspection and/or litigation, the designated employer may be requested to present evidence in respect of the 7 justifiable reasons for not meeting specific targets.</p>
+            <p>Prior to making an offer for employment and/or promotion where the preferred candidate is not the prioritised candidate based on the EE analysis and plan, complete the prompts and/or questions below and add in relevant supporting information. It would be useful to use AI in a secure environment to assist in determining whether a candidate(s) is "suitably qualified" as envisaged in s20(3)-(5). This will provide data-driven insights into whether the said candidate could acquire the required competencies in a reasonable time.</p>
         </div>
 
         <!-- Audit and Record Questions -->
@@ -54,33 +48,23 @@
                 <option value="Semi-skilled">Semi-skilled</option>
                 <option value="Unskilled">Unskilled</option>
             </select>
-
-            <label for="urgency-level">5. Urgency level for new appointment - date and reasons as well as absolute last date that vacancy can be filled:</label>
-            <textarea id="urgency-level" required></textarea>
-
-            <label for="position-type">6. New position or replacement position:</label>
-            <select id="position-type" required>
-                <option value="">Select position type</option>
-                <option value="New">New</option>
-                <option value="Replacement">Replacement</option>
-            </select>
         </div>
 
         <!-- EE Plan Questions -->
         <div class="form-section">
             <h3>Employment Equity Plan Questions</h3>
 
-            <label for="requires-designated">7.1 Is the position being considered one that requires a specific designated person to make progress toward and/or achieve the targets?</label>
+            <label for="requires-designated">5.1 Is the position being considered one that requires a specific prioritised designated person (sub-race, gender, or person with disabilities PWD) to make progress toward and/or achieve the targets?</label>
             <select id="requires-designated" required>
                 <option value="">Select answer</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
 
-            <div class="conditional-note">7.2 If "no", then there is no evident need to continue with this document</div>
-            <div class="conditional-note">7.3 If "yes" then answer the following questions</div>
+            <div class="conditional-note">5.2 If "no", then there is no evident need to continue with this document</div>
+            <div class="conditional-note">5.3 If "yes" then answer the following questions</div>
 
-            <label for="priority-highest">7.4.1 Highest Priority Target Group:</label>
+            <label for="priority-highest">5.4.1 Highest Priority Target Group:</label>
             <select id="priority-highest" required>
                 <option value="">Select group</option>
                 <option value="AM">AM</option>
@@ -93,8 +77,8 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="priority-next">7.4.2 Next Highest Priority Target Group:</label>
-            <select id="priority-next">
+            <label for="priority-second">5.4.2 Second Highest Priority Target Group:</label>
+            <select id="priority-second">
                 <option value="">Select group</option>
                 <option value="AM">AM</option>
                 <option value="AF">AF</option>
@@ -106,7 +90,7 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="priority-third">7.4.3 Third Highest Priority Target Group:</label>
+            <label for="priority-third">5.4.3 Third Highest Priority Target Group:</label>
             <select id="priority-third">
                 <option value="">Select group</option>
                 <option value="AM">AM</option>
@@ -119,17 +103,17 @@
                 <option value="PWD">PWD</option>
             </select>
 
-            <label for="aligned-highest">8. Is the preferred candidate for the position aligned to the "highest" priority sub-race and gender group?</label>
+            <label for="aligned-highest">6. Is the preferred candidate for the position aligned to the "highest" priority sub-race and gender group?</label>
             <select id="aligned-highest" required>
                 <option value="">Select answer</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
 
-            <div class="conditional-note">8.1 If "no", then continue with this document</div>
-            <div class="conditional-note">8.2 If "yes" then there is no evident need to continue</div>
+            <div class="conditional-note">6.1 If "no", then continue with this document</div>
+            <div class="conditional-note">6.2 If "yes" then there is no evident need to continue</div>
 
-            <label for="preferred-candidate-group">8.3 What is the sub-race and gender group of the preferred candidate:</label>
+            <label for="preferred-candidate-group">6.3 What is the sub-race and gender group of the preferred candidate:</label>
             <select id="preferred-candidate-group" required>
                 <option value="">Select group</option>
                 <option value="AM">AM</option>
@@ -144,67 +128,43 @@
             </select>
         </div>
 
-        <!-- Candidate Assessment - Updated Section -->
+        <!-- Suitably Qualified Persons Assessment -->
         <div class="form-section">
-            <h3>Justification and assessment of why Highest Ranking Candidate is not from an EE Designated Group</h3>
-            <p>Substantiate why each of the EE Targeted Candidates were not successful or suitable across all the below reasons.</p>
-
-            <label for="qualifications">9.1 Qualifications:</label>
-            <textarea id="qualifications"></textarea>
-
-            <label for="prior-learning">9.2 Prior learning:</label>
-            <textarea id="prior-learning"></textarea>
-
-            <label for="relevant-experience">9.3 Relevant experience:</label>
-            <textarea id="relevant-experience"></textarea>
+            <h3>Assessing whether prioritised designated persons under the EE plan and targets, who applied for the position did not meet with the requirements of the definition of Suitably Qualified Person (SQP)</h3>
+            <p>The EE Act requires employers to satisfy themselves that designated persons who apply for positions are not suitably qualified, before appointing an individual who is not aligned with the EE targets. Herewith are the provisions of s20(3)-(5). Importantly, one of the most important justifications will be linked to proving that it would take unreasonably long for the candidate to meet the required competencies.</p>
             
-            <!-- Container for repeatable competency time sections -->
-            <div id="competency-time-container">
-                <div class="competency-time-section">
-                    <label for="competency-time-0">9.4 How long would it take for the candidate to acquire the competencies?</label>
-                    <select id="competency-time-0" class="competency-time" required>
-                        <option value="">Select timeframe</option>
-                        <option value="1">1 Month</option>
-                        <option value="2">2 Months</option>
-                        <option value="3">3 Months</option>
-                        <option value="4">4 Months</option>
-                        <option value="5">5 Months</option>
-                        <option value="6">6 Months</option>
-                        <option value="7">7 Months</option>
-                        <option value="8">8 Months</option>
-                        <option value="9">9 Months</option>
-                        <option value="10">10 Months</option>
-                        <option value="11">11 Months</option>
-                        <option value="12">12 Months</option>
-                        <option value="more">More than 12 Months</option>
-                        <option value="not-reasonable">Not within a reasonable time period</option>
-                    </select>
-                    
-                    <label for="candidate-description-0">Candidate Description/Name:</label>
-                    <input type="text" id="candidate-description-0" class="candidate-description">
-                </div>
-            </div>
+            <p style="margin-top: 15px; font-weight: 600; color: #333;">20(3) For purposes of this Act, a person may be suitably qualified for a job as a result of any one of, or any combination of that person's –</p>
+            <p style="margin-left: 20px; color: #555; line-height: 1.8;">(a) formal qualifications;<br>(b) prior learning;<br>(c) relevant experience; or<br>(d) capacity to acquire, within a reasonable time, the ability to do the job.</p>
             
-            <button type="button" id="add-competency-field" class="add-field-btn">Add Another Candidate</button>
+            <p style="margin-top: 15px; font-weight: 600; color: #333;">(4) When determining whether a person is suitably qualified for a job, an employer must–</p>
+            <p style="margin-left: 20px; color: #555; line-height: 1.8;">(a) review all the factors listed in subsection (3); and<br>(b) determine whether that person has the ability to do the job in terms of any one of, or any combination of those factors.</p>
+            
+            <p style="margin-top: 15px; font-weight: 600; color: #333;">(5) In making a determination under subsection (4), an employer may not unfairly discriminate against a person solely on the grounds of that person's lack of relevant experience.</p>
+
+            <h4 style="color: #1e3a5f; font-size: 16px; margin-top: 20px; margin-bottom: 15px;">Substantiate why each of the "in-scope" designated persons who were candidates for the position, were not successful or suitable across all the below reasons.</h4>
+
+            <div id="candidates-container"></div>
+
+            <button type="button" id="add-candidate" class="add-button">+ Add Another Candidate</button>
         </div>
 
         <!-- Evidence Section -->
         <div class="form-section">
             <h3>Evidence Record</h3>
 
-            <label for="job-profile">10.1 The job profile:</label>
+            <label for="job-profile">8.1 The job profile:</label>
             <textarea id="job-profile"></textarea>
 
-            <label for="advertising-channels">10.2 The channels in which it was advertised:</label>
+            <label for="advertising-channels">8.2 The channels in which it was advertised:</label>
             <textarea id="advertising-channels"></textarea>
 
-            <label for="response-numbers">10.3 The core response numbers:</label>
+            <label for="response-numbers">8.3 The core response numbers:</label>
             <textarea id="response-numbers"></textarea>
 
-            <label for="shortlist-demographics">10.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
+            <label for="shortlist-demographics">8.4.1 The sub-race, gender and disability demographics of the short-listed candidates:</label>
             <textarea id="shortlist-demographics"></textarea>
 
-            <label for="non-selection-reason">10.4.2 The primary reason why the highest priority EE Targeted candidate was not selected:</label>
+            <label for="non-selection-reason">8.4.2 The primary reason why the highest priority EE Targeted candidate was not selected:</label>
             <select id="non-selection-reason" required>
                 <option value="">Select reason</option>
                 <option value="Insufficient Recruitment Opportunities">1. Insufficient Recruitment Opportunities</option>
@@ -217,21 +177,13 @@
             </select>
         </div>
 
-        <!-- Sign-Off Section - Updated to be dynamic -->
+        <!-- Sign-Off Section -->
         <div class="form-section">
             <h3>Sign-off</h3>
-            
-            <div id="signoff-container">
-                <div class="signoff-section">
-                    <label for="signoff-position-0">Position Title:</label>
-                    <input type="text" id="signoff-position-0" class="signoff-position">
-                    
-                    <label for="signoff-name-0">Name:</label>
-                    <input type="text" id="signoff-name-0" class="signoff-name">
-                </div>
-            </div>
-            
-            <button type="button" id="add-signoff-field" class="add-field-btn">Add Another Signatory</button>
+
+            <div id="signatories-container"></div>
+
+            <button type="button" id="add-signatory" class="add-button">+ Add Another Signatory</button>
         </div>
 
         <!-- Export Buttons -->
