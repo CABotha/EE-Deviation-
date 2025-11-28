@@ -1,524 +1,311 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize form elements
-    const form = document.getElementById('ee-form');
-    const excelBtn = document.getElementById('export-excel');
-    const pdfBtn = document.getElementById('export-pdf');
-    const addCompetencyBtn = document.getElementById('add-competency-field');
-    const addSignoffBtn = document.getElementById('add-signoff-field');
-    let competencyCounter = 1; // Start at 1 because we already have 0
-    let signoffCounter = 1; // Start at 1 because we already have 0
-
-    // Add another competency time field
-    addCompetencyBtn.addEventListener('click', function() {
-        const container = document.getElementById('competency-time-container');
-        const newSection = document.createElement('div');
-        newSection.className = 'competency-time-section';
-        
-        newSection.innerHTML = `
-            <label for="competency-time-${competencyCounter}">9.4 How long would it take for the candidate to acquire the competencies?</label>
-            <select id="competency-time-${competencyCounter}" class="competency-time" required>
-                <option value="">Select timeframe</option>
-                <option value="1">1 Month</option>
-                <option value="2">2 Months</option>
-                <option value="3">3 Months</option>
-                <option value="4">4 Months</option>
-                <option value="5">5 Months</option>
-                <option value="6">6 Months</option>
-                <option value="7">7 Months</option>
-                <option value="8">8 Months</option>
-                <option value="9">9 Months</option>
-                <option value="10">10 Months</option>
-                <option value="11">11 Months</option>
-                <option value="12">12 Months</option>
-                <option value="more">More than 12 Months</option>
-                <option value="not-reasonable">Not within a reasonable time period</option>
-            </select>
-            
-            <label for="candidate-description-${competencyCounter}">Candidate Description/Name:</label>
-            <input type="text" id="candidate-description-${competencyCounter}" class="candidate-description">
-            
-            <button type="button" class="remove-field-btn">Remove</button>
-        `;
-        
-        container.appendChild(newSection);
-        competencyCounter++;
-        
-        // Add event listener to the new remove button
-        newSection.querySelector('.remove-field-btn').addEventListener('click', function() {
-            newSection.remove();
-        });
-    });
-    
-    // Add another signoff field
-    addSignoffBtn.addEventListener('click', function() {
-        const container = document.getElementById('signoff-container');
-        const newSection = document.createElement('div');
-        newSection.className = 'signoff-section';
-        
-        newSection.innerHTML = `
-            <label for="signoff-position-${signoffCounter}">Position Title:</label>
-            <input type="text" id="signoff-position-${signoffCounter}" class="signoff-position">
-            
-            <label for="signoff-name-${signoffCounter}">Name:</label>
-            <input type="text" id="signoff-name-${signoffCounter}" class="signoff-name">
-            
-            <button type="button" class="remove-field-btn">Remove</button>
-        `;
-        
-        container.appendChild(newSection);
-        signoffCounter++;
-        
-        // Add event listener to the new remove button
-        newSection.querySelector('.remove-field-btn').addEventListener('click', function() {
-            newSection.remove();
-        });
-    });
-
-    // Get current date formatted as YYYY-MM-DD
-    function getFormattedDate() {
-        return new Date().toISOString().split('T')[0];
-    }
-
-    // Collect form data in a structured way
-    function getStructuredFormData() {
-        // Get all competency time entries
-        const competencyTimeEntries = Array.from(document.querySelectorAll('.competency-time-section')).map((section, index) => {
-            const timeSelect = section.querySelector('.competency-time');
-            const description = section.querySelector('.candidate-description');
-            return {
-                time: timeSelect ? timeSelect.value || '-' : '-',
-                description: description ? description.value || '-' : '-'
-            };
-        });
-
-        // Get all signoff entries
-        const signoffEntries = Array.from(document.querySelectorAll('.signoff-section')).map((section, index) => {
-            const position = section.querySelector('.signoff-position');
-            const name = section.querySelector('.signoff-name');
-            return {
-                position: position ? position.value || '-' : '-',
-                name: name ? name.value || '-' : '-'
-            };
-        });
-
-        // Structure data by sections
-        return {
-            documentInfo: {
-                title: "Employment Equity Deviation Record",
-                generatedDate: getFormattedDate()
-            },
-            sections: [
-                {
-                    title: "Basic Information",
-                    fields: [
-                        { label: "1. Date of Completion", value: document.getElementById('date-completion').value || '-' },
-                        { label: "2. Department/Division", value: document.getElementById('department').value || '-' },
-                        { label: "3. Job Title", value: document.getElementById('job-title').value || '-' },
-                        { label: "4. Occupational Level", value: document.getElementById('occupational-level').value || '-' },
-                        { label: "5. Urgency Level", value: document.getElementById('urgency-level').value || '-' },
-                        { label: "6. Position Type", value: document.getElementById('position-type').value || '-' }
-                    ]
-                },
-                {
-                    title: "Employment Equity Plan Information",
-                    fields: [
-                        { label: "7.1 Requires Designated Person", value: document.getElementById('requires-designated').value || '-' },
-                        { label: "7.4.1 Highest Priority Target Group", value: document.getElementById('priority-highest').value || '-' },
-                        { label: "7.4.2 Next Priority Target Group", value: document.getElementById('priority-next').value || '-' },
-                        { label: "7.4.3 Third Priority Target Group", value: document.getElementById('priority-third').value || '-' },
-                        { label: "8. Aligned to Highest Priority", value: document.getElementById('aligned-highest').value || '-' },
-                        { label: "8.3 Preferred Candidate Group", value: document.getElementById('preferred-candidate-group').value || '-' }
-                    ]
-                },
-                {
-                    title: "Candidate Assessment and Justification",
-                    fields: [
-                        { label: "9.1 Qualifications", value: document.getElementById('qualifications').value || '-' },
-                        { label: "9.2 Prior Learning", value: document.getElementById('prior-learning').value || '-' },
-                        { label: "9.3 Relevant Experience", value: document.getElementById('relevant-experience').value || '-' }
-                    ],
-                    competencyTimeEntries: competencyTimeEntries.map((entry, index) => ({
-                        label: `9.4 Candidate ${index+1}`,
-                        time: entry.time,
-                        description: entry.description
-                    }))
-                },
-                {
-                    title: "Evidence Record",
-                    fields: [
-                        { label: "10.1 Job Profile", value: document.getElementById('job-profile').value || '-' },
-                        { label: "10.2 Advertising Channels", value: document.getElementById('advertising-channels').value || '-' },
-                        { label: "10.3 Response Numbers", value: document.getElementById('response-numbers').value || '-' },
-                        { label: "10.4.1 Shortlist Demographics", value: document.getElementById('shortlist-demographics').value || '-' },
-                        { label: "10.4.2 Non-selection Reason", value: document.getElementById('non-selection-reason').value || '-' }
-                    ]
-                },
-                {
-                    title: "Sign-off",
-                    signoffEntries: signoffEntries.map((entry, index) => ({
-                        label: `Sign-off ${index+1}`,
-                        position: entry.position,
-                        name: entry.name
-                    }))
-                }
-            ]
-        };
-    }
-
-    // Convert structured data to flat format (for backward compatibility)
-    function flattenFormData(structuredData) {
-        const flatData = {};
-        
-        // First collect all fields in the correct order
-        const orderedFields = [];
-        
-        // Process each section and maintain proper ordering
-        structuredData.sections.forEach(section => {
-            // Add basic fields
-            if (section.fields) {
-                section.fields.forEach(field => {
-                    orderedFields.push({ key: field.label, value: field.value });
-                });
-            }
-            
-            // Add competency time entries immediately after section 9.3 if this is the candidate assessment section
-            if (section.competencyTimeEntries && section.title.includes("Candidate Assessment")) {
-                section.competencyTimeEntries.forEach((entry, index) => {
-                    orderedFields.push({ key: `${entry.label} Time to Acquire Competencies`, value: entry.time });
-                    orderedFields.push({ key: `${entry.label} Description`, value: entry.description });
-                });
-            }
-        });
-        
-        // Add signoff entries at the end
-        const signoffSection = structuredData.sections.find(section => section.title === "Sign-off");
-        if (signoffSection && signoffSection.signoffEntries) {
-            signoffSection.signoffEntries.forEach((entry, index) => {
-                orderedFields.push({ key: `${entry.label} Position`, value: entry.position });
-                orderedFields.push({ key: `${entry.label} Name`, value: entry.name });
-            });
-        }
-        
-        // Convert ordered fields to flat data
-        orderedFields.forEach(item => {
-            flatData[item.key] = item.value;
-        });
-        
-        return flatData;
-    }
-
-    // Helper function for Excel styling
-    function getCellStyle(type) {
-        const styles = {
-            header: {
-                font: { bold: true, color: { rgb: "FFFFFF" } },
-                fill: { fgColor: { rgb: "2E5AAB" } },
-                alignment: { wrapText: true, vertical: "top", horizontal: "center" }
-            },
-            sectionHeader: {
-                font: { bold: true, color: { rgb: "FFFFFF" } },
-                fill: { fgColor: { rgb: "4472C4" } },
-                alignment: { wrapText: true, vertical: "top", horizontal: "left" }
-            },
-            label: {
-                font: { bold: true },
-                fill: { fgColor: { rgb: "E6EFF9" } },
-                alignment: { wrapText: true, vertical: "top", horizontal: "left" }
-            },
-            value: {
-                alignment: { wrapText: true, vertical: "top", horizontal: "left" }
-            }
-        };
-        
-        return styles[type] || {};
-    }
-
-    // Improved Excel Export Function
-    function exportToExcel() {
-        try {
-            const structuredData = getStructuredFormData();
-            const wb = XLSX.utils.book_new();
-            
-            // Define column widths
-            const columnWidths = [
-                { wch: 40 }, // Label column
-                { wch: 60 }  // Value column
-            ];
-            
-            // Create worksheet for summary view (flat table format)
-            const flatData = flattenFormData(structuredData);
-            const summaryData = [['Field', 'Value']];
-            
-            // Add all fields in the flattened data (which preserves proper ordering)
-            Object.entries(flatData).forEach(([key, value]) => {
-                summaryData.push([key, value]);
-            });
-            
-            // Create summary worksheet
-            const summaryWs = XLSX.utils.aoa_to_sheet(summaryData);
-            summaryWs['!cols'] = columnWidths;
-            
-            // Apply styles to summary sheet
-            const summaryRange = XLSX.utils.decode_range(summaryWs['!ref']);
-            for (let R = summaryRange.s.r; R <= summaryRange.e.r; ++R) {
-                for (let C = summaryRange.s.c; C <= summaryRange.e.c; ++C) {
-                    const address = XLSX.utils.encode_cell({ r: R, c: C });
-                    if (!summaryWs[address]) continue;
-                    
-                    if (R === 0) {
-                        // Header row
-                        summaryWs[address].s = getCellStyle('header');
-                    } else if (C === 0) {
-                        // Label column
-                        summaryWs[address].s = getCellStyle('label');
-                    } else {
-                        // Value column
-                        summaryWs[address].s = getCellStyle('value');
-                    }
-                }
-            }
-            
-            // Add summary worksheet as the first sheet (most important view)
-            XLSX.utils.book_append_sheet(wb, summaryWs, "EE Deviation Record");
-            
-            // Create a detailed worksheet with all data in a structured format
-            const mainWsData = [];
-            
-            // Add title
-            mainWsData.push([structuredData.documentInfo.title, `Generated: ${structuredData.documentInfo.generatedDate}`]);
-            mainWsData.push([]);  // Empty row
-            
-            // Process each section
-            structuredData.sections.forEach(section => {
-                // Add section header
-                mainWsData.push([section.title, '']);
-                
-                // Add basic fields
-                if (section.fields) {
-                    section.fields.forEach(field => {
-                        mainWsData.push([field.label, field.value]);
-                    });
-                }
-                
-                // Add competency time entries immediately after the basic fields in the candidate section
-                if (section.competencyTimeEntries) {
-                    section.competencyTimeEntries.forEach(entry => {
-                        mainWsData.push([`${entry.label}`, '']);
-                        mainWsData.push(['Time to Acquire Competencies', entry.time]);
-                        mainWsData.push(['Candidate Description/Name', entry.description]);
-                    });
-                }
-                
-                // Add signoff entries
-                if (section.signoffEntries) {
-                    section.signoffEntries.forEach(entry => {
-                        mainWsData.push([`${entry.label}`, '']);
-                        mainWsData.push(['Position', entry.position]);
-                        mainWsData.push(['Name', entry.name]);
-                    });
-                }
-                
-                // Add an empty row after each section except the last one
-                mainWsData.push([]);
-            });
-            
-            // Create detailed worksheet
-            const mainWs = XLSX.utils.aoa_to_sheet(mainWsData);
-            
-            // Set column widths
-            mainWs['!cols'] = columnWidths;
-            
-            // Apply styles to the main worksheet
-            const range = XLSX.utils.decode_range(mainWs['!ref']);
-            
-            // Track section row indices
-            const sectionRows = [];
-            let currentRow = 0;
-            
-            // Title row
-            const titleAddress = XLSX.utils.encode_cell({ r: currentRow, c: 0 });
-            if (mainWs[titleAddress]) {
-                mainWs[titleAddress].s = {
-                    font: { bold: true, sz: 14, color: { rgb: "2E5AAB" } },
-                    alignment: { horizontal: "left" }
-                };
-            }
-            currentRow += 2;  // Skip the empty row
-            
-            // Find section rows
-            structuredData.sections.forEach(section => {
-                sectionRows.push(currentRow);
-                
-                // Skip fields
-                if (section.fields) {
-                    currentRow += section.fields.length;
-                }
-                
-                // Skip competency entries (3 rows per entry)
-                if (section.competencyTimeEntries) {
-                    currentRow += section.competencyTimeEntries.length * 3;
-                }
-                
-                // Skip signoff entries (3 rows per entry)
-                if (section.signoffEntries) {
-                    currentRow += section.signoffEntries.length * 3;
-                }
-                
-                // Skip empty row at end of section
-                currentRow += 1;
-            });
-            
-            // Apply styles
-            for (let R = range.s.r; R <= range.e.r; ++R) {
-                for (let C = range.s.c; C <= range.e.c; ++C) {
-                    const address = XLSX.utils.encode_cell({ r: R, c: C });
-                    if (!mainWs[address]) continue;
-                    
-                    // Apply styles based on row type
-                    if (sectionRows.includes(R)) {
-                        // Section header
-                        mainWs[address].s = getCellStyle('sectionHeader');
-                    } else if (C === 0 && R > 1) {
-                        // Label cells (except title and section headers)
-                        const isSectionRow = sectionRows.includes(R);
-                        const isSubLabelRow = C === 0 && mainWs[address].v && 
-                                            (mainWs[address].v === 'Time to Acquire Competencies' || 
-                                             mainWs[address].v === 'Candidate Description/Name' ||
-                                             mainWs[address].v === 'Position' ||
-                                             mainWs[address].v === 'Name');
-                        
-                        if (!isSectionRow) {
-                            // Apply label style with indentation for sub-labels
-                            mainWs[address].s = {
-                                ...getCellStyle('label'),
-                                alignment: {
-                                    ...getCellStyle('label').alignment,
-                                    indent: isSubLabelRow ? 2 : 0
-                                }
-                            };
-                        }
-                    } else if (C === 1 && R > 1) {
-                        // Value cells
-                        mainWs[address].s = getCellStyle('value');
-                    }
-                }
-            }
-            
-            // Add detailed worksheet as the second sheet
-            XLSX.utils.book_append_sheet(wb, mainWs, "Detailed View");
-            
-            // Generate filename and save
-            const fileName = `EE_Deviation_Record_${getFormattedDate()}.xlsx`;
-            XLSX.writeFile(wb, fileName);
-
-            alert('Excel file has been generated successfully!');
-        } catch (error) {
-            console.error('Excel export error:', error);
-            alert('Error exporting to Excel. Please try again.');
-        }
-    }
-
-    // Improved PDF Export Function
-    function exportToPDF() {
-        try {
-            const structuredData = getStructuredFormData();
-            const flatData = flattenFormData(structuredData); // Get properly ordered data
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            // Set document properties
-            doc.setProperties({
-                title: 'Employment Equity Deviation Record',
-                subject: 'EE Deviation Record',
-                author: 'Global Business Solutions',
-                keywords: 'employment equity, deviation record',
-                creator: 'EE Form System'
-            });
-
-            // Add title
-            doc.setFontSize(16);
-            doc.setFont(undefined, 'bold');
-            doc.setTextColor(46, 90, 171);
-            doc.text('Employment Equity Deviation Record', 105, 15, { align: 'center' });
-            
-            // Add date
-            doc.setFontSize(10);
-            doc.setFont(undefined, 'normal');
-            doc.setTextColor(102, 102, 102);
-            doc.text(`Generated: ${getFormattedDate()}`, 105, 25, { align: 'center' });
-
-            // Create a clean table with properly ordered data
-            const tableData = Object.entries(flatData).map(([key, value]) => {
-                // Process long text by breaking into multiple lines if needed
-                let processedValue = value;
-                if (typeof value === 'string' && value.length > 80) {
-                    processedValue = value.match(/.{1,80}(?:\s|$)/g).join('\n');
-                }
-                return [key, processedValue];
-            });
-
-            // Add table with improved styling
-            doc.autoTable({
-                startY: 30,
-                head: [['Field', 'Value']],
-                body: tableData,
-                headStyles: {
-                    fillColor: [46, 90, 171],
-                    textColor: 255,
-                    fontSize: 12,
-                    fontStyle: 'bold',
-                    cellPadding: 5
-                },
-                bodyStyles: {
-                    fontSize: 10,
-                    cellPadding: 5
-                },
-                alternateRowStyles: {
-                    fillColor: [240, 245, 255]
-                },
-                columnStyles: {
-                    0: { 
-                        cellWidth: 80,
-                        fontStyle: 'bold',
-                        fillColor: [230, 239, 249]
-                    },
-                    1: { 
-                        cellWidth: 'auto' 
-                    }
-                },
-                margin: { top: 30, right: 15, bottom: 20, left: 15 },
-                theme: 'grid',
-                tableWidth: 'auto',
-                didDrawPage: function(data) {
-                    // Add footer on each page
-                    doc.setFontSize(8);
-                    doc.setTextColor(102, 102, 102);
-                    doc.text('Global Business Solutions - Employment Equity Deviation Record', 
-                        data.settings.margin.left,
-                        doc.internal.pageSize.height - 10);
-                    doc.text(`Page ${data.pageCount}`, 
-                        doc.internal.pageSize.width - 20,
-                        doc.internal.pageSize.height - 10);
-                }
-            });
-
-            // Generate filename and save
-            const fileName = `EE_Deviation_Record_${getFormattedDate()}.pdf`;
-            doc.save(fileName);
-
-            alert('PDF file has been generated successfully!');
-        } catch (error) {
-            console.error('PDF export error:', error);
-            alert('Error exporting to PDF. Please try again.');
-        }
-    }
+    // Initialize form with one candidate and one signatory
+    initializeForm();
 
     // Add event listeners
-    excelBtn.addEventListener('click', exportToExcel);
-    pdfBtn.addEventListener('click', exportToPDF);
-
-    // Prevent form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-    });
+    document.getElementById('add-candidate').addEventListener('click', addCandidate);
+    document.getElementById('add-signatory').addEventListener('click', addSignatory);
+    document.getElementById('export-excel').addEventListener('click', exportToExcel);
+    document.getElementById('export-pdf').addEventListener('click', exportToPDF);
 });
+
+// Initialize with one candidate and one signatory
+function initializeForm() {
+    addCandidate();
+    addSignatory();
+}
+
+function addCandidate() {
+    const container = document.getElementById('candidates-container');
+    const candidateCount = container.children.length + 1;
+    const candidateSection = document.createElement('div');
+    candidateSection.className = 'candidate-section';
+    candidateSection.setAttribute('data-candidate-number', candidateCount);
+    candidateSection.innerHTML = `
+        <h4 style="color: #1e3a5f; margin-bottom: 15px;">Candidate ${candidateCount}</h4>
+        <label for="qualifications-${candidateCount}">7.1 Qualifications:</label>
+        <textarea id="qualifications-${candidateCount}"></textarea>
+
+        <label for="prior-learning-${candidateCount}">7.2 Prior learning:</label>
+        <textarea id="prior-learning-${candidateCount}"></textarea>
+
+        <label for="relevant-experience-${candidateCount}">7.3 Relevant experience:</label>
+        <textarea id="relevant-experience-${candidateCount}"></textarea>
+
+        <label for="competency-time-${candidateCount}">7.4 How long would it take for the candidate to acquire the competencies?</label>
+        <select id="competency-time-${candidateCount}">
+            <option value="">Select timeframe</option>
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="4">4 Months</option>
+            <option value="5">5 Months</option>
+            <option value="6">6 Months</option>
+            <option value="7">7 Months</option>
+            <option value="8">8 Months</option>
+            <option value="9">9 Months</option>
+            <option value="10">10 Months</option>
+            <option value="11">11 Months</option>
+            <option value="12">12 Months</option>
+            <option value="more">More than 12 Months</option>
+            <option value="not-reasonable">Not within a reasonable time period</option>
+        </select>
+
+        <label for="candidate-name-${candidateCount}">Candidate Description/Name:</label>
+        <input type="text" id="candidate-name-${candidateCount}" />
+
+        ${candidateCount > 1 ? `<button type="button" class="remove-button" onclick="removeCandidate(this)">Remove Candidate</button>` : ''}
+    `;
+    container.appendChild(candidateSection);
+}
+
+function removeCandidate(button) {
+    button.closest('.candidate-section').remove();
+    renumberCandidates();
+}
+
+function renumberCandidates() {
+    const container = document.getElementById('candidates-container');
+    const sections = container.querySelectorAll('.candidate-section');
+    sections.forEach((section, index) => {
+        const candidateNum = index + 1;
+        section.setAttribute('data-candidate-number', candidateNum);
+        const h4 = section.querySelector('h4');
+        if (h4) h4.textContent = `Candidate ${candidateNum}`;
+    });
+}
+
+function addSignatory() {
+    const container = document.getElementById('signatories-container');
+    const signatoryCount = container.children.length + 1;
+    const signatorySection = document.createElement('div');
+    signatorySection.className = 'candidate-section';
+    signatorySection.setAttribute('data-signatory-number', signatoryCount);
+    signatorySection.innerHTML = `
+        <h4 style="color: #1e3a5f; margin-bottom: 15px;">Signatory ${signatoryCount}</h4>
+        <label for="position-title-${signatoryCount}">Position Title:</label>
+        <input type="text" id="position-title-${signatoryCount}">
+
+        <label for="signatory-name-${signatoryCount}">Name:</label>
+        <input type="text" id="signatory-name-${signatoryCount}">
+
+        ${signatoryCount > 1 ? `<button type="button" class="remove-button" onclick="removeSignatory(this)">Remove Signatory</button>` : ''}
+    `;
+    container.appendChild(signatorySection);
+}
+
+function removeSignatory(button) {
+    button.closest('.candidate-section').remove();
+    renumberSignatories();
+}
+
+function renumberSignatories() {
+    const container = document.getElementById('signatories-container');
+    const sections = container.querySelectorAll('.candidate-section');
+    sections.forEach((section, index) => {
+        const signatoryNum = index + 1;
+        section.setAttribute('data-signatory-number', signatoryNum);
+        const h4 = section.querySelector('h4');
+        if (h4) h4.textContent = `Signatory ${signatoryNum}`;
+    });
+}
+
+// Get current date formatted as YYYY-MM-DD
+function getFormattedDate() {
+    return new Date().toISOString().split('T')[0];
+}
+
+// Collect all form data including dynamic candidates and signatories
+function getFormData() {
+    const formData = {
+        "1. Date of Completion": document.getElementById('date-completion').value || '-',
+        "2. Department/Division": document.getElementById('department').value || '-',
+        "3. Job Title": document.getElementById('job-title').value || '-',
+        "4. Occupational Level": document.getElementById('occupational-level').value || '-',
+        "5.1 Requires Designated Person": document.getElementById('requires-designated').value || '-',
+        "5.4.1 Highest Priority Target Group": document.getElementById('priority-highest').value || '-',
+        "5.4.2 Second Priority Target Group": document.getElementById('priority-second').value || '-',
+        "5.4.3 Third Priority Target Group": document.getElementById('priority-third').value || '-',
+        "6. Aligned to Highest Priority": document.getElementById('aligned-highest').value || '-',
+        "6.3 Preferred Candidate Group": document.getElementById('preferred-candidate-group').value || '-'
+    };
+
+    // Collect all candidates
+    const candidatesContainer = document.getElementById('candidates-container');
+    const candidateSections = candidatesContainer.querySelectorAll('.candidate-section');
+    
+    candidateSections.forEach((section, index) => {
+        const candidateNum = index + 1;
+        const prefix = `Candidate ${candidateNum}`;
+        
+        formData[`${prefix} - Name/Description`] = document.getElementById(`candidate-name-${candidateNum}`)?.value || '-';
+        formData[`${prefix} - 7.1 Qualifications`] = document.getElementById(`qualifications-${candidateNum}`)?.value || '-';
+        formData[`${prefix} - 7.2 Prior Learning`] = document.getElementById(`prior-learning-${candidateNum}`)?.value || '-';
+        formData[`${prefix} - 7.3 Relevant Experience`] = document.getElementById(`relevant-experience-${candidateNum}`)?.value || '-';
+        formData[`${prefix} - 7.4 Time to Acquire Competencies`] = document.getElementById(`competency-time-${candidateNum}`)?.value || '-';
+    });
+
+    // Evidence section
+    formData["8.1 Job Profile"] = document.getElementById('job-profile').value || '-';
+    formData["8.2 Advertising Channels"] = document.getElementById('advertising-channels').value || '-';
+    formData["8.3 Response Numbers"] = document.getElementById('response-numbers').value || '-';
+    formData["8.4.1 Shortlist Demographics"] = document.getElementById('shortlist-demographics').value || '-';
+    formData["8.4.2 Non-selection Reason"] = document.getElementById('non-selection-reason').value || '-';
+
+    // Collect all signatories
+    const signatoriesContainer = document.getElementById('signatories-container');
+    const signatorySections = signatoriesContainer.querySelectorAll('.candidate-section');
+    
+    signatorySections.forEach((section, index) => {
+        const signatoryNum = index + 1;
+        const prefix = `Signatory ${signatoryNum}`;
+        
+        formData[`${prefix} - Position Title`] = document.getElementById(`position-title-${signatoryNum}`)?.value || '-';
+        formData[`${prefix} - Name`] = document.getElementById(`signatory-name-${signatoryNum}`)?.value || '-';
+    });
+
+    return formData;
+}
+
+// Excel Export Function
+function exportToExcel() {
+    try {
+        const formData = getFormData();
+        
+        // Create worksheet data in vertical format (Field | Value)
+        const wsData = [];
+        
+        // Add header row
+        wsData.push(['Field', 'Value']);
+        
+        // Add all data rows
+        Object.entries(formData).forEach(([key, value]) => {
+            wsData.push([key, value]);
+        });
+
+        // Create workbook
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+        // Set column widths
+        ws['!cols'] = [
+            { wch: 50 },  // Field column
+            { wch: 80 }   // Value column
+        ];
+
+        // Style the header row
+        const headerStyle = {
+            font: { 
+                bold: true,
+                color: { rgb: "FFFFFF" }
+            },
+            fill: { 
+                fgColor: { rgb: "1E3A5F" }
+            },
+            alignment: { 
+                wrapText: true, 
+                vertical: "top",
+                horizontal: "left"
+            }
+        };
+
+        // Apply header style to first row
+        if (ws['A1']) ws['A1'].s = headerStyle;
+        if (ws['B1']) ws['B1'].s = headerStyle;
+
+        // Add worksheet to workbook
+        XLSX.utils.book_append_sheet(wb, ws, "EE Deviation Record");
+
+        // Generate filename and save
+        const fileName = `EE_Deviation_Record_${getFormattedDate()}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+
+        alert('Excel file has been generated successfully!');
+    } catch (error) {
+        console.error('Excel export error:', error);
+        alert('Error exporting to Excel. Please try again.');
+    }
+}
+
+// PDF Export Function
+function exportToPDF() {
+    try {
+        const formData = getFormData();
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Set document properties
+        doc.setProperties({
+            title: 'Employment Equity Deviation Record',
+            subject: 'EE Deviation Record',
+            author: 'Global Business Solutions',
+            keywords: 'employment equity, deviation record',
+            creator: 'DEEVIATE System'
+        });
+
+        // Add title
+        doc.setFontSize(16);
+        doc.setFont(undefined, 'bold');
+        doc.text('Employment Equity Deviation Record', 105, 15, { align: 'center' });
+        
+        // Add date
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Generated: ${getFormattedDate()}`, 105, 25, { align: 'center' });
+
+        // Prepare table data
+        const tableData = Object.entries(formData).map(([key, value]) => {
+            return [key, value];
+        });
+
+        // Add table with better formatting
+        doc.autoTable({
+            startY: 30,
+            head: [['Field', 'Value']],
+            body: tableData,
+            headStyles: {
+                fillColor: [30, 58, 95],
+                textColor: 255,
+                fontSize: 11,
+                fontStyle: 'bold',
+                cellPadding: 4
+            },
+            bodyStyles: {
+                fontSize: 9,
+                cellPadding: 3,
+                valign: 'top'
+            },
+            columnStyles: {
+                0: { cellWidth: 70, fontStyle: 'bold' },
+                1: { cellWidth: 'auto' }
+            },
+            margin: { top: 30, right: 15, bottom: 20, left: 15 },
+            theme: 'grid',
+            tableWidth: 'auto',
+            styles: {
+                overflow: 'linebreak',
+                cellWidth: 'wrap'
+            },
+            didDrawPage: function(data) {
+                // Add footer on each page
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'normal');
+                doc.text('Global Business Solutions - Employment Equity Deviation Record', 
+                    data.settings.margin.left,
+                    doc.internal.pageSize.height - 10);
+                doc.text(`Page ${data.pageCount}`, 
+                    doc.internal.pageSize.width - 20,
+                    doc.internal.pageSize.height - 10);
+            }
+        });
+
+        // Generate filename and save
+        const fileName = `EE_Deviation_Record_${getFormattedDate()}.pdf`;
+        doc.save(fileName);
+
+        alert('PDF file has been generated successfully!');
+    } catch (error) {
+        console.error('PDF export error:', error);
+        alert('Error exporting to PDF. Please try again.');
+    }
+}
